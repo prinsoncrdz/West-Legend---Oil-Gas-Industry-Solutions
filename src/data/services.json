@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Exploration & Production",
+    "icon": "Drill",
+    "description": "Comprehensive exploration services utilizing advanced seismic technology and geological analysis to identify optimal drilling locations."
+  },
+  {
+    "id": 2,
+    "title": "Engineering Solutions",
+    "icon": "Settings",
+    "description": "Expert engineering consultation and design services for oil and gas infrastructure projects worldwide."
+  },
+  {
+    "id": 3,
+    "title": "Maintenance Services",
+    "icon": "Wrench",
+    "description": "24/7 maintenance and repair services ensuring optimal performance and minimal downtime for your operations."
+  },
+  {
+    "id": 4,
+    "title": "Transportation & Logistics",
+    "icon": "Truck",
+    "description": "Efficient transportation solutions for crude oil, natural gas, and refined products across global markets."
+  },
+  {
+    "id": 5,
+    "title": "Environmental Compliance",
+    "icon": "Leaf",
+    "description": "Environmental management services ensuring adherence to regulations and sustainable operations."
+  },
+  {
+    "id": 6,
+    "title": "Safety Training",
+    "icon": "Shield",
+    "description": "Comprehensive safety training programs and certification courses for industry professionals."
+  }
+]

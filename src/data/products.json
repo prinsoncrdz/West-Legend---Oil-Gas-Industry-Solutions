@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Offshore Drilling Equipment",
+    "category": "Drilling",
+    "description": "Advanced offshore drilling systems for deep-water oil and gas exploration with cutting-edge safety features.",
+    "image": "/images/product-1.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Pipeline Infrastructure",
+    "category": "Transportation",
+    "description": "High-grade steel pipeline systems designed for efficient and safe transportation of oil and natural gas.",
+    "image": "/images/product-2.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Refinery Systems",
+    "category": "Processing",
+    "description": "State-of-the-art refinery equipment for crude oil processing and petrochemical production.",
+    "image": "/images/product-3.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Storage Tank Solutions",
+    "category": "Storage",
+    "description": "Industrial-grade storage tanks for petroleum products with advanced monitoring systems.",
+    "image": "/images/product-4.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Marine Transport Vessels",
+    "category": "Marine",
+    "description": "Specialized tankers and vessels for offshore oil and gas transportation operations.",
+    "image": "/images/product-5.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Safety Equipment",
+    "category": "Safety",
+    "description": "Comprehensive safety systems and equipment for oil and gas industry operations.",
+    "image": "/images/product-6.jpg"
+  }
+]
