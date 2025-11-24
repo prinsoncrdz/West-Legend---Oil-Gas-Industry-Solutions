@@ -1,129 +1,228 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronUp, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+const catalogUrl = "/mnt/data/WEST LEGEND CONTENT (2) (1).pdf";
+
+const productGroups = [
+  { title: "Hoses & Connectors", items: ["Hydraulic Hose", "Industrial Rubber Hoses", "Hammer Unions", "Swivel Joints", "Trelleborg Composite Hoses", "Rotary Drilling Hoses"] },
+  { title: "Fittings & Adaptors", items: ["Hose Fittings", "Ferrules", "BSP / NPT / JIC / ORFS", "Stainless Steel Fittings", "Camlock Fittings"] },
+  { title: "Gaskets & Sealing", items: ["Ring Joint Gaskets (API 16A)"] },
+  { title: "Fasteners", items: ["Bolts, Nuts, Washers, Locknuts"] },
+  { title: "Hand Tools", items: ["Wrenches & Spanners", "Cutting Tools", "Gripping & Clamping Tools", "Measuring Tools"] },
+  { title: "Safety Items", items: ["Safety Shoes", "Gloves", "Safety Helmets", "Jackets", "Coveralls", "Full Body Harness"] },
+  { title: "Lifting & Rigging", items: ["Nylon Slings"] },
+  { title: "Warning & Safety Gear", items: ["Warning Tape", "Safety Nets", "Traffic Cones"] },
+];
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [desktopProductsOpen, setDesktopProductsOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const location = useLocation();
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const closeTimeout = useRef<number | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    function onDocClick(e: MouseEvent) {
+      if (!dropdownRef.current) return;
+      if (!(e.target instanceof Node)) return;
+      if (!dropdownRef.current.contains(e.target)) {
+        setDesktopProductsOpen(false);
+      }
+    }
+    document.addEventListener("click", onDocClick);
+    return () => document.removeEventListener("click", onDocClick);
   }, []);
 
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About" },
-    { path: "/products", label: "Products" },
     { path: "/services", label: "Services" },
     { path: "/contact", label: "Contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
+  const openDropdown = () => {
+    if (closeTimeout.current) {
+      window.clearTimeout(closeTimeout.current);
+      closeTimeout.current = null;
+    }
+    setDesktopProductsOpen(true);
+  };
+
+  const scheduleCloseDropdown = (delay = 150) => {
+    if (closeTimeout.current) window.clearTimeout(closeTimeout.current);
+    closeTimeout.current = window.setTimeout(() => {
+      setDesktopProductsOpen(false);
+      closeTimeout.current = null;
+    }, delay) as unknown as number;
+  };
+
   return (
     <>
-      {/* Top Bar */}
-      <div className="bg-primary text-primary-foreground py-2 px-4">
-        <div className="container mx-auto flex justify-between items-center text-sm">
-          <div className="flex gap-6">
-            <a href="tel:+1234567890" className="flex items-center gap-2 hover:text-secondary transition-smooth">
-              <Phone size={14} />
-              <span className="hidden md:inline">+1 (234) 567-890</span>
-            </a>
-            <a href="mailto:info@nafta.com" className="flex items-center gap-2 hover:text-secondary transition-smooth">
-              <Mail size={14} />
-              <span className="hidden md:inline">info@nafta.com</span>
-            </a>
-          </div>
-          <div className="text-xs">
-            Leading Oil & Gas Solutions Provider
-          </div>
-        </div>
-      </div>
-
-      {/* Main Header */}
       <header
-        className={`sticky top-0 z-50 transition-smooth ${
-          isScrolled
-            ? "bg-background shadow-industrial"
-            : "bg-background/95 backdrop-blur-sm"
+        className={`sticky top-0 z-50 transition-all duration-300 ${
+          isScrolled ? "bg-background shadow-industrial backdrop-blur-sm" : "bg-background/95"
         }`}
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
+
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-secondary rounded flex items-center justify-center">
-                <span className="text-secondary-foreground font-bold text-xl">N</span>
+              <div className={`w-10 h-10 rounded flex items-center justify-center transition-all ${isScrolled ? "scale-90" : "scale-100"} bg-secondary`}>
+                <span className="text-secondary-foreground font-bold text-xl">W</span>
               </div>
-              <span className="text-2xl font-bold text-primary">NAFTA</span>
+              <span className={`text-2xl font-bold ${isScrolled ? "text-lg" : "text-2xl"}`}>
+                WEST LEGEND
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`font-semibold transition-smooth relative ${
-                    isActive(link.path)
-                      ? "text-secondary"
-                      : "text-foreground hover:text-secondary"
+                  className={`font-semibold relative px-1 transition-colors ${
+                    isActive(link.path) ? "text-secondary" : "text-foreground hover:text-secondary"
                   }`}
                 >
                   {link.label}
-                  {isActive(link.path) && (
-                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-secondary"></span>
-                  )}
+                  {isActive(link.path) && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-secondary" />}
                 </Link>
               ))}
+
+              {/* Products Dropdown */}
+              <div
+                ref={dropdownRef}
+                className="relative"
+                onMouseEnter={openDropdown}
+                onMouseLeave={() => scheduleCloseDropdown(150)}
+              >
+                <button
+                  onClick={() => setDesktopProductsOpen((s) => !s)}
+                  aria-haspopup="true"
+                  aria-expanded={desktopProductsOpen}
+                  className={`flex items-center gap-1 font-semibold px-1 transition-colors ${
+                    location.pathname.startsWith("/products") ? "text-secondary" : "text-foreground hover:text-secondary"
+                  }`}
+                >
+                  Products
+                  {desktopProductsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                </button>
+
+                {desktopProductsOpen && (
+                  <div
+                    className="absolute left-1/2 transform -translate-x-1/2 mt-3 w-[760px] bg-white border rounded-md shadow-lg p-4 z-50 pointer-events-auto"
+                    onMouseEnter={openDropdown}
+                    onMouseLeave={() => scheduleCloseDropdown(120)}
+                  >
+                    <div className="grid grid-cols-4 gap-4 text-sm">
+                      {productGroups.map((group) => (
+                        <div key={group.title}>
+                          <h4 className="font-semibold text-slate-800 mb-2">{group.title}</h4>
+                          <ul className="space-y-1">
+                            {group.items.map((it) => (
+                              <li key={it}>
+                                <Link
+                                  to={`/products`}
+                                  state={{ category: group.title, item: it }}
+                                  onClick={() => setDesktopProductsOpen(false)}
+                                  className="block py-1 text-slate-600 hover:text-blue-600"
+                                >
+                                  {it}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+
+                      <div>
+                        <h4 className="font-semibold text-slate-800 mb-2">Quick Links</h4>
+                        <ul className="space-y-3">
+                          <li>
+                            <Link to="/products" className="text-blue-600 font-medium" onClick={() => setDesktopProductsOpen(false)}>
+                              View All Products
+                            </Link>
+                          </li>
+                          <li>
+                            <a href={catalogUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 py-1 hover:text-blue-600">
+                              <FileText size={16} /> Download Catalog
+                            </a>
+                          </li>
+                          <li>
+                            <Link to="/contact" className="block py-1 text-slate-600 hover:text-blue-600" onClick={() => setDesktopProductsOpen(false)}>
+                              Request a Quote
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+
+                    </div>
+                  </div>
+                )}
+
+              </div>
             </nav>
 
-            {/* CTA + Cart Icon */}
-<div className="hidden lg:flex items-center gap-6">
+            {/* MERGED → Both branches wanted a CTA button + cart icon */}
+            <div className="hidden lg:flex items-center gap-6">
 
-  <Button asChild className="bg-secondary hover:bg-secondary/90">
-    <Link to="/contact">Get A Quote</Link>
-  </Button>
+              <Button asChild className="bg-secondary hover:bg-secondary/90">
+                <Link to="/contact">Get A Quote</Link>
+              </Button>
 
-  {/* Cart Icon */}
-  <Link to="/cart" className="relative group">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-7 h-7 text-primary group-hover:text-secondary transition"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m0 0h12m-12 0a2 2 0 104 0m8 0a2 2 0 104 0"
-      />
-    </svg>
+              {/* Cart Icon */}
+              <Link to="/cart" className="relative group">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-7 h-7 text-primary group-hover:text-secondary transition"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m0 0h12m-12 0a2 2 0 104 0m8 0a2 2 0 104 0"
+                  />
+                </svg>
 
-    {/* Cart count bubble */}
-    <span className="absolute -top-2 -right-2 bg-secondary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-      0
-    </span>
-  </Link>
-</div>
-
+                <span className="absolute -top-2 -right-2 bg-secondary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  0
+                </span>
+              </Link>
+            </div>
 
             {/* Mobile Menu Button */}
-            <button
-              className="lg:hidden text-foreground"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+            <div className="flex items-center gap-3 lg:hidden">
+              <a href={catalogUrl} target="_blank" rel="noreferrer" className="p-2 text-foreground">
+                <FileText size={20} />
+              </a>
+
+              <button
+                className="text-foreground"
+                onClick={() => setIsMobileMenuOpen((s) => !s)}
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              </button>
+            </div>
+
           </div>
         </div>
 
@@ -131,51 +230,94 @@ const Header = () => {
         {isMobileMenuOpen && (
           <div className="lg:hidden bg-background border-t border-border animate-fade-in">
             <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
+              
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`font-semibold py-2 transition-smooth ${
-                    isActive(link.path)
-                      ? "text-secondary"
-                      : "text-foreground hover:text-secondary"
+                  className={`font-semibold py-2 transition-colors ${
+                    isActive(link.path) ? "text-secondary" : "text-foreground hover:text-secondary"
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
 
-              {/* Cart - Mobile */}
-<Link
-  to="/cart"
-  onClick={() => setIsMobileMenuOpen(false)}
-  className="font-semibold py-2 flex items-center gap-3 text-foreground hover:text-secondary transition-smooth"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="w-6 h-6"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m0 0h12m-12 0a2 2 0 104 0m8 0a2 2 0 104 0"
-    />
-  </svg>
-  Cart
-</Link>
+              {/* Cart – Mobile */}
+              <Link
+                to="/cart"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-semibold py-2 flex items-center gap-3 text-foreground hover:text-secondary"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m0 0h12m-12 0a2 2 0 104 0m8 0a2 2 0 104 0"
+                  />
+                </svg>
+                Cart
+              </Link>
 
+              {/* Mobile Products Accordion */}
+              <div>
+                <button
+                  onClick={() => setMobileProductsOpen((s) => !s)}
+                  className="w-full flex items-center justify-between py-2 font-semibold text-foreground"
+                >
+                  <span>Products</span>
+                  {mobileProductsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                </button>
+
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    mobileProductsOpen ? "max-h-[1200px] mt-2" : "max-h-0"
+                  }`}
+                >
+                  <div className="grid gap-4">
+
+                    {productGroups.map((g) => (
+                      <div key={g.title}>
+                        <h5 className="text-sm font-semibold text-slate-800">{g.title}</h5>
+                        <ul className="mt-2 space-y-1">
+                          {g.items.map((it) => (
+                            <li key={it}>
+                              <Link
+                                to="/products"
+                                state={{ category: g.title, item: it }}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="block text-slate-600 text-sm py-1"
+                              >
+                                {it}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+
+                    <a href={catalogUrl} target="_blank" rel="noreferrer" className="text-blue-600 font-medium">
+                      Download Catalog
+                    </a>
+
+                  </div>
+                </div>
+              </div>
 
               <Button asChild className="bg-secondary hover:bg-secondary/90 w-full">
                 <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
                   Get A Quote
                 </Link>
               </Button>
-              
+
             </nav>
           </div>
         )}
