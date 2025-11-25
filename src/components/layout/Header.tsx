@@ -3,17 +3,79 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, ChevronUp, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+// put the PDF in /public and use this path, not /mnt/data
 const catalogUrl = "/westlegend.pdf";
 
 const productGroups = [
-  { title: "Hoses & Connectors", items: ["Hydraulic Hose", "Industrial Rubber Hoses", "Hammer Unions", "Swivel Joints", "Trelleborg Composite Hoses", "Rotary Drilling Hoses"] },
-  { title: "Fittings & Adaptors", items: ["Hose Fittings", "Ferrules", "BSP / NPT / JIC / ORFS", "Stainless Steel Fittings", "Camlock Fittings"] },
-  { title: "Gaskets & Sealing", items: ["Ring Joint Gaskets (API 16A)"] },
-  { title: "Fasteners", items: ["Bolts, Nuts, Washers, Locknuts"] },
-  { title: "Hand Tools", items: ["Wrenches & Spanners", "Cutting Tools", "Gripping Tools", "Measuring Tools"] },
-  { title: "Safety Items", items: ["Safety Shoes", "Gloves", "Safety Helmets", "Coveralls"] },
-  { title: "Lifting & Rigging", items: ["Nylon Slings"] },
-  { title: "Warning & Safety Gear", items: ["Warning Tape", "Safety Nets", "Traffic Cones"] },
+  {
+    title: "Hoses & Connectors",
+    sectionId: "hoses-connectors",
+    items: [
+      { label: "Hydraulic Hose", productId: 101 },
+      { label: "Industrial Rubber Hoses", productId: 102 },
+      { label: "Hammer Unions", productId: 103 },
+      { label: "Swivel Joints", productId: 104 },
+      { label: "Trelleborg Composite Hoses", productId: 105 }, // maps to Trelleborg France Industrial & Composite Hoses
+      { label: "Rotary Drilling Hoses", productId: 109 },
+    ],
+  },
+  {
+    title: "Fittings & Adaptors",
+    sectionId: "fittings-adaptors",
+    items: [
+      { label: "Hose Fittings", productId: 110 },
+      { label: "Ferrules", productId: 110 }, // same product details
+      { label: "BSP / NPT / JIC / ORFS", productId: 110 }, // same product
+      { label: "Stainless Steel Fittings", productId: 112 },
+      { label: "Camlock Fittings", productId: 113 },
+    ],
+  },
+  {
+    title: "Gaskets & Sealing",
+    sectionId: "gaskets-sealing",
+    items: [{ label: "Ring Joint Gaskets (API 16A)", productId: 106 }],
+  },
+  {
+    title: "Fasteners",
+    sectionId: "fasteners",
+    items: [{ label: "Bolts, Nuts, Washers, Locknuts", productId: 201 }],
+  },
+  {
+    title: "Hand Tools",
+    sectionId: "hand-tools",
+    items: [
+      { label: "Wrenches & Spanners", productId: 301 },
+      { label: "Cutting Tools", productId: 304 },
+      { label: "Gripping & Clamping Tools", productId: 310 },
+      { label: "Measuring Tools", productId: 317 },
+    ],
+  },
+  {
+    title: "Safety Items",
+    sectionId: "safety-items",
+    items: [
+      { label: "Safety Shoes", productId: 401 },
+      { label: "Gloves", productId: 406 }, // general gloves
+      { label: "Safety Helmets", productId: 417 },
+      { label: "Jackets", productId: 413 },
+      { label: "Coveralls", productId: 412 },
+      { label: "Full Body Harness", productId: 414 },
+    ],
+  },
+  {
+    title: "Lifting & Rigging",
+    sectionId: "lifting-rigging",
+    items: [{ label: "Nylon Slings", productId: 501 }],
+  },
+  {
+    title: "Warning & Safety Gear",
+    sectionId: "warning-safety-gear",
+    items: [
+      { label: "Warning Tape", productId: 415 },
+      { label: "Safety Nets", productId: 416 },
+      { label: "Traffic Cones", productId: 419 },
+    ],
+  },
 ];
 
 const Header = () => {
@@ -70,6 +132,8 @@ const Header = () => {
     }, delay) as unknown as number;
   };
 
+
+
   return (
     <>
       <header
@@ -99,10 +163,10 @@ const Header = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`font-semibold text-sm md:text-base relative px-1 ${
+                  className={`font-semibold relative px-1 transition-colors ${
                     isActive(link.path)
                       ? "text-secondary"
-                      : "text-slate-800 hover:text-secondary"
+                      : "text-foreground hover:text-secondary"
                   }`}
                 >
                   {link.label}
@@ -121,10 +185,20 @@ const Header = () => {
               >
                 <button
                   onClick={() => setDesktopProductsOpen((s) => !s)}
-                  className="flex items-center gap-1 font-semibold text-sm md:text-base text-slate-800 hover:text-secondary"
+                  aria-haspopup="true"
+                  aria-expanded={desktopProductsOpen}
+                  className={`flex items-center gap-1 font-semibold px-1 transition-colors ${
+                    location.pathname.startsWith("/products")
+                      ? "text-secondary"
+                      : "text-foreground hover:text-secondary"
+                  }`}
                 >
                   Products
-                  {desktopProductsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  {desktopProductsOpen ? (
+                    <ChevronUp size={16} />
+                  ) : (
+                    <ChevronDown size={16} />
+                  )}
                 </button>
 
                 {/* Desktop Mega Menu */}
@@ -134,16 +208,18 @@ const Header = () => {
 
                       {productGroups.map((group) => (
                         <div key={group.title}>
-                          <h4 className="font-semibold text-slate-800 mb-2">{group.title}</h4>
+                          <h4 className="font-semibold text-slate-800 mb-2">
+                            {group.title}
+                          </h4>
                           <ul className="space-y-1">
-                            {group.items.map((it) => (
-                              <li key={it}>
+                            {group.items.map((item) => (
+                              <li key={item.label}>
                                 <Link
-                                  to={`/products`}
-                                  state={{ category: group.title, item: it }}
+                                  to={`/products?id=${item.productId}`}
+                                  onClick={() => setDesktopProductsOpen(false)}
                                   className="block py-1 text-slate-600 hover:text-blue-600"
                                 >
-                                  {it}
+                                  {item.label}
                                 </Link>
                               </li>
                             ))}
@@ -151,33 +227,43 @@ const Header = () => {
                         </div>
                       ))}
 
-                      {/* Quick Links */}
+                      {/* Quick Links column */}
                       <div>
-                        <h4 className="font-semibold text-slate-800 mb-2">Quick Links</h4>
-                        <ul className="space-y-3">
+                        <h4 className="font-semibold text-slate-800 mb-2">
+                          Quick Links
+                        </h4>
+                        <ul className="space-y-2">
                           <li>
                             <Link
                               to="/products"
+                              onClick={() => setDesktopProductsOpen(false)}
                               className="text-blue-600 font-medium"
                             >
                               View All Products
                             </Link>
                           </li>
-
                           <li>
-                            <a href={catalogUrl} download className="flex items-center gap-2 text-slate-700 hover:text-blue-600">
-                              <FileText size={16} /> Download Catalog
+                            <a
+                              href={catalogUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="flex items-center gap-2 py-1 hover:text-blue-600"
+                            >
+                              <FileText size={16} />
+                              Download Catalog
                             </a>
                           </li>
-
                           <li>
-                            <Link to="/contact" className="text-slate-700 hover:text-blue-600">
+                            <Link
+                              to="/contact"
+                              onClick={() => setDesktopProductsOpen(false)}
+                              className="block py-1 text-slate-600 hover:text-blue-600"
+                            >
                               Contact
                             </Link>
                           </li>
                         </ul>
                       </div>
-
                     </div>
                   </div>
                 )}
@@ -191,9 +277,17 @@ const Header = () => {
 
             {/* MOBILE HEADER ICONS */}
             <div className="flex items-center gap-3 lg:hidden">
-              <a href={catalogUrl} target="_blank" rel="noreferrer" className="p-2 text-slate-700">
-                <FileText size={22} />
-              </a>
+             <a
+  href={catalogUrl}
+  target="_blank"
+  rel="noreferrer"
+  className="p-2 text-slate-700"
+  aria-label="Download product catalog PDF"
+  title="Download product catalog PDF"
+>
+  <FileText size={22} />
+</a>
+
 
               <button
                 onClick={() => setIsMobileMenuOpen((s) => !s)}
@@ -202,7 +296,6 @@ const Header = () => {
                 {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
               </button>
             </div>
-
           </div>
         </div>
 
@@ -227,14 +320,41 @@ const Header = () => {
                 </Link>
               ))}
 
+              {/* Cart – Mobile */}
+              <Link
+                to="/cart"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-semibold py-2 flex items-center gap-3 text-foreground hover:text-secondary"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m0 0h12m-12 0a2 2 0 104 0m8 0a2 2 0 104 0"
+                  />
+                </svg>
+                Cart
+              </Link>
+
               {/* Mobile Products Accordion */}
               <div>
                 <button
                   onClick={() => setMobileProductsOpen((s) => !s)}
                   className="w-full flex items-center justify-between py-2 font-semibold text-slate-800"
                 >
-                  Products
-                  {mobileProductsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  <span>Products</span>
+                  {mobileProductsOpen ? (
+                    <ChevronUp size={16} />
+                  ) : (
+                    <ChevronDown size={16} />
+                  )}
                 </button>
 
                 <div
@@ -242,21 +362,21 @@ const Header = () => {
                     mobileProductsOpen ? "max-h-[1500px] mt-2" : "max-h-0"
                   }`}
                 >
-                  <div className="grid gap-4 py-2">
-
-                    {productGroups.map((group) => (
-                      <div key={group.title}>
-                        <h5 className="text-sm font-semibold text-slate-900">{group.title}</h5>
+                  <div className="grid gap-4">
+                    {productGroups.map((g) => (
+                      <div key={g.title}>
+                        <h5 className="text-sm font-semibold text-slate-800">
+                          {g.title}
+                        </h5>
                         <ul className="mt-2 space-y-1">
-                          {group.items.map((it) => (
-                            <li key={it}>
+                          {g.items.map((item) => (
+                            <li key={item.label}>
                               <Link
-                                to="/products"
-                                state={{ category: group.title, item: it }}
+                                to={`/products?id=${item.productId}`}
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="block text-slate-600 text-sm py-1"
                               >
-                                {it}
+                                {item.label}
                               </Link>
                             </li>
                           ))}
@@ -264,10 +384,14 @@ const Header = () => {
                       </div>
                     ))}
 
-                    <a href={catalogUrl} download className="text-blue-600 font-medium">
+                    <a
+                      href={catalogUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 font-medium"
+                    >
                       Download Catalog
                     </a>
-
                   </div>
                 </div>
               </div>

@@ -7,15 +7,10 @@ import {
   Compass,
   Hammer,
   Package,
-  Layers,
-  Eye,
-  Ruler,
-  FileEdit,
 } from "lucide-react";
 
 import { motion } from "framer-motion";
-import { ShoppingCart, FileText } from "lucide-react";
-
+import { useSearchParams } from "react-router-dom";
 
 /* ------------ 1. TYPES & DATA ------------ */
 
@@ -48,8 +43,7 @@ and mechanical stresses in heavy machinery, oilfield equipment, and industrial h
       "Applications: Heavy machinery, oilfield equipment, industrial hydraulics",
       "Key benefit: Leak-proof operation under harsh conditions",
     ],
-    imagePlaceholder:
-"/images/HydraulicHose.jpeg",
+    imagePlaceholder: "/images/HydraulicHose.jpeg",
   },
   {
     id: 102,
@@ -69,8 +63,7 @@ suitable for diverse industrial needs.
       "Chemical Hoses: Corrosion-resistant for acids, solvents, and chemicals.",
       "Air & Water Hoses: Flexible hoses for general air and water conveyance.",
     ],
-    imagePlaceholder:
-      "/images/IndustrialRubberHoses.jpeg",
+    imagePlaceholder: "/images/IndustrialRubberHoses.jpeg",
   },
   {
     id: 103,
@@ -91,8 +84,7 @@ fluid transfer.
       "Design: Precision-manufactured with tapered seals and reinforced bodies",
       "Key benefit: Withstands extreme pressures and harsh oilfield conditions",
     ],
-    imagePlaceholder:
-      "images/HammerUnions.jpeg",
+    imagePlaceholder: "images/HammerUnions.jpeg",
   },
   {
     id: 104,
@@ -113,8 +105,7 @@ marine applications.
       "Performance: Maintains leak-proof fluid transfer",
       "Applications: Dynamic equipment, oilfield, and marine systems",
     ],
-    imagePlaceholder:
-      "/images/SwivelJoints.jpeg",
+    imagePlaceholder: "/images/SwivelJoints.jpeg",
   },
   {
     id: 105,
@@ -155,8 +146,7 @@ refineries, and critical pipeline connections.
       "Function: Precise, durable sealing in ring groove flanges",
       "Applications: Oilfields, refineries, critical pipeline connections",
     ],
-    imagePlaceholder:
-      "/images/RingJointGaskets(Windlass License).jpeg",
+    imagePlaceholder: "/images/RingJointGaskets(Windlass License).jpeg",
   },
   {
     id: 107,
@@ -176,8 +166,7 @@ excellent UV and weather resistance across diverse environments.
       "Applications: Water transfer, chemical handling, industrial processing, irrigation",
       "Benefits: Cost-effective with strong UV and environmental resistance",
     ],
-    imagePlaceholder:
-      "/images/HeavyDutyPVC Hose.jpeg",
+    imagePlaceholder: "/images/HeavyDutyPVC Hose.jpeg",
   },
   {
     id: 108,
@@ -198,8 +187,7 @@ assemblies.
       "Performance: Withstands pressure cycling and vibration",
       "Applications: Gas lines, hydraulic connections, marine piping systems",
     ],
-    imagePlaceholder:
-      "/images/YarnThread.jpeg",
+    imagePlaceholder: "/images/YarnThread.jpeg",
   },
   {
     id: 109,
@@ -222,8 +210,7 @@ them suitable for tough drilling environments and fluid types in oilfield operat
       "Temperature range: Approx. –30°C to +82°C",
       "Application: High-pressure drilling fluid transfer in oilfield operations",
     ],
-    imagePlaceholder:
-      "/images/RotaryDrillingHoses.jpeg",
+    imagePlaceholder: "/images/RotaryDrillingHoses.jpeg",
   },
   {
     id: 110,
@@ -272,8 +259,7 @@ drilling operations, and marine fluid transfer systems.
       "45° Metric Female 24° Cone DIN 3865 L & S with O-Ring",
       "90° Metric Female 24° Cone DIN 3865 L & S with O-Ring",
     ],
-    imagePlaceholder:
-      "/images/HoseFittingsandAdaptors.jpeg",
+    imagePlaceholder: "/images/HoseFittingsandAdaptors.jpeg",
   },
   {
     id: 111,
@@ -320,8 +306,7 @@ such as marine, chemical processing, and oil & gas industries.
       "Configurations: Straight, elbow, tee, adapter",
       "Applications: Marine, chemical processing, oil & gas",
     ],
-    imagePlaceholder:
-      "/images/StainlessSteelFittings.jpeg",
+    imagePlaceholder: "/images/StainlessSteelFittings.jpeg",
   },
   {
     id: 113,
@@ -350,8 +335,8 @@ range of industrial and commercial fluid handling needs.
   /* ---------- FASTENERS ---------- */
   {
     id: 201,
-    category: "Hoses & Connectors",
-    subCategory: "Hoses & Connectors",
+    category: "Fasteners",
+    subCategory: "Fasteners",
     title: "Bolts, Nuts, Washers & Locknuts",
     description: `
 A wide range of industrial fasteners including bolts (UNC, LN key bolts) and nuts made from stainless 
@@ -368,8 +353,7 @@ reliable fastening in construction, manufacturing, and maintenance applications.
       "Locknuts: Added security against loosening from vibration and torque",
       "Applications: Construction, manufacturing, industrial maintenance",
     ],
-    imagePlaceholder:
-      "/images/BoltsNutsWashers&Locknuts.jpeg",
+    imagePlaceholder: "/images/BoltsNutsWashers&Locknuts.jpeg",
   },
 
   /* ---------- TOOLS: WRENCHES & SPANNERS ---------- */
@@ -392,8 +376,7 @@ operations, and emergency repairs in demanding industrial environments.
       "Applications: Construction, manufacturing, oilfield maintenance",
       "Key benefit: Secure grip and precise torque control",
     ],
-    imagePlaceholder:
-      "/images/Spanner.jpeg",
+    imagePlaceholder: "/images/Spanner.jpeg",
   },
   {
     id: 302,
@@ -413,8 +396,7 @@ of multiple spanners in a single, portable instrument for maximum workplace effi
       "Applications: On-site repairs and maintenance with varying fastener sizes",
       "Advantage: Space-saving and highly versatile tool",
     ],
-    imagePlaceholder:
-      "/images/AdjustableSpanner.jpeg",
+    imagePlaceholder: "/images/AdjustableSpanner.jpeg",
   },
   {
     id: 303,
@@ -433,8 +415,7 @@ industrial machinery, and oilfield equipment maintenance operations.
       "Benefit: Excellent leverage and reach in confined spaces",
       "Applications: Automotive, machinery assembly, oilfield equipment maintenance",
     ],
-    imagePlaceholder:
-      "/images/TubularSpanner.jpeg",
+    imagePlaceholder: "/images/TubularSpanner.jpeg",
   },
 
   /* ---------- TOOLS: CUTTING & SHEARING ---------- */
@@ -455,8 +436,7 @@ indispensable for site work where powered cutting equipment is impractical or un
       "Features: Sharp-toothed, hardened blades for clean cuts",
       "Applications: Construction, plumbing, fabrication, maintenance work",
     ],
-    imagePlaceholder:
-      "/images/HandSaw.jpeg",
+    imagePlaceholder: "/images/HandSaw.jpeg",
   },
   {
     id: 305,
@@ -475,8 +455,7 @@ accurate wire cutting in confined spaces.
       "Feature: Spring-loaded handles for reduced fatigue",
       "Applications: Electrical installation, repairs, confined spaces",
     ],
-    imagePlaceholder:
-      "/images/Nippers.jpeg",
+    imagePlaceholder: "/images/Nippers.jpeg",
   },
   {
     id: 306,
@@ -495,8 +474,7 @@ cutting performance through extended use in demanding workplace conditions.
       "Feature: Replaceable blades and ergonomic handles",
       "Applications: Manufacturing, construction, industrial sites",
     ],
-    imagePlaceholder:
-      "/images/knife.jpeg",
+    imagePlaceholder: "/images/knife.jpeg",
   },
   {
     id: 307,
@@ -515,8 +493,7 @@ maintenance, and detailed fabrication work requiring controlled cutting force.
       "Applications: Electrical, mechanical, industrial, electronics assembly",
       "Benefit: Hardened edges for long-term sharpness",
     ],
-    imagePlaceholder:
-      "/images/SideCutter.jpeg",
+    imagePlaceholder: "/images/SideCutter.jpeg",
   },
   {
     id: 308,
@@ -536,8 +513,7 @@ operations.
       "Feature: Long handles for superior leverage",
       "Applications: Security, emergency response, industrial maintenance",
     ],
-    imagePlaceholder:
-      "/images/BoltCutter.jpeg",
+    imagePlaceholder: "/images/BoltCutter.jpeg",
   },
   {
     id: 309,
@@ -557,8 +533,7 @@ workers, HVAC technicians, and fabrication specialists in industrial and constru
       "Design: Compound leverage for reduced effort and better control",
       "Applications: Sheet metal, HVAC, fabrication, construction",
     ],
-    imagePlaceholder:
-      "/images/AviationSnip.jpeg",
+    imagePlaceholder: "/images/AviationSnip.jpeg",
   },
 
   /* ---------- TOOLS: GRIPPING & CLAMPING ---------- */
@@ -579,8 +554,7 @@ slip-joint variations for specialized tasks.
       "Types: Needle-nose, tongue-and-groove, slip-joint, and more",
       "Applications: Electrical, plumbing, mechanical work",
     ],
-    imagePlaceholder:
-      "/images/pliers.jpg",
+    imagePlaceholder: "/images/pliers.jpg",
   },
   {
     id: 311,
@@ -598,8 +572,7 @@ material thicknesses and clamping requirements.
       "Feature: Locking mechanism holds material without hand pressure",
       "Benefit: Adjustable screw for various material thicknesses",
     ],
-    imagePlaceholder:
-      "/images/ViseGrip.jpeg",
+    imagePlaceholder: "/images/ViseGrip.jpeg",
   },
   {
     id: 312,
@@ -617,8 +590,7 @@ capacities from light-duty to heavy-duty applications.
       "Feature: Threaded screw for controlled clamping force",
       "Range: Light-duty to heavy-duty sizes and throat depths",
     ],
-    imagePlaceholder:
-      "/images/C-Clamp.jpeg",
+    imagePlaceholder: "/images/C-Clamp.jpeg",
   },
 
   /* ---------- TOOLS: FASTENING & ASSEMBLY ---------- */
@@ -638,8 +610,7 @@ oilfield operations.
       "Benefit: Multi-size, multi-head versatility in one set",
       "Applications: Assembly, maintenance, and repair operations",
     ],
-    imagePlaceholder:
-      "/images/ScrewDriverSet.jpeg",
+    imagePlaceholder: "/images/ScrewDriverSet.jpeg",
   },
   {
     id: 314,
@@ -656,8 +627,7 @@ Pneumatic versions increase productivity in high-volume assembly operations and 
       "Function: Install rivets for permanent mechanical joints",
       "Applications: Sheet metal assembly, repair, fabrication",
     ],
-    imagePlaceholder:
-      "/images/RivetGun.jpg",
+    imagePlaceholder: "/images/RivetGun.jpg",
   },
   {
     id: 315,
@@ -674,8 +644,7 @@ field repairs, remote locations, and applications requiring controlled rivet pla
       "Benefit: Precise rivet placement without power tools",
       "Applications: Field repairs, remote locations, low-volume work",
     ],
-    imagePlaceholder:
-      "/images/HandRivetTool.jpeg",
+    imagePlaceholder: "/images/HandRivetTool.jpeg",
   },
 
   /* ---------- TOOLS: MARKING, MEASURING & LAYOUT ---------- */
@@ -694,8 +663,7 @@ Essential for construction layout, alignment verification, and marking cut lines
       "Applications: Building layout, installation, fabrication",
       "Benefit: Quick, accurate alignment markings on various surfaces",
     ],
-    imagePlaceholder:
-      "/images/ChalkLineSet.jpeg",
+    imagePlaceholder: "/images/ChalkLineSet.jpeg",
   },
   {
     id: 317,
@@ -713,8 +681,7 @@ industrial settings.
       "Sizes: Typical lengths include 24\", 48\", 72\" and more",
       "Options: Magnetic models for hands-free use on metal surfaces",
     ],
-    imagePlaceholder:
-      "/images/SpiritLevels.jpeg",
+    imagePlaceholder: "/images/SpiritLevels.jpeg",
   },
   {
     id: 318,
@@ -731,8 +698,7 @@ Precision-machined edges ensure accurate measurements and layout work in fabrica
       "Applications: Carpentry, metalwork, fabrication layout",
       "Benefit: Precision-machined edges for accurate marking",
     ],
-    imagePlaceholder:
-      "/images/RightAngleTrySquare.jpeg",
+    imagePlaceholder: "/images/RightAngleTrySquare.jpeg",
   },
 
   /* ---------- TOOLS: FINISHING & SMOOTHING ---------- */
@@ -752,8 +718,7 @@ requirements.
       "Grades: Coarse, medium, fine for controlled material removal",
       "Applications: Deburring, smoothing, and finishing surfaces",
     ],
-    imagePlaceholder:
-      "/images/Files Set.jpeg",
+    imagePlaceholder: "/images/Files Set.jpeg",
   },
   {
     id: 320,
@@ -771,8 +736,7 @@ construction work.
       "Feature: Adjustable blade depth for controlled removal",
       "Applications: Carpentry, construction, fine finishing work",
     ],
-    imagePlaceholder:
-      "/images/HandPlaner.jpeg",
+    imagePlaceholder: "/images/HandPlaner.jpeg",
   },
 
   /* ---------- SAFETY ITEMS: FOOTWEAR ---------- */
@@ -793,8 +757,7 @@ reduce fatigue during extended standing and walking.
       "Applications: Industrial and oilfield environments",
       "Benefit: Comfort for extended work shifts",
     ],
-    imagePlaceholder:
-      "/images/SafetyShoes.jpeg",
+    imagePlaceholder: "/images/SafetyShoes.jpeg",
   },
   {
     id: 402,
@@ -811,8 +774,7 @@ Suitable for training programs and temporary workers in industrial settings.
       "Use: Apprentices and general industrial workers",
       "Benefit: Affordable protection for daily use",
     ],
-    imagePlaceholder:
-      "/images/ApprenticeBlackShoes.jpeg",
+    imagePlaceholder: "/images/ApprenticeBlackShoes.jpeg",
   },
   {
     id: 403,
@@ -829,8 +791,7 @@ Thermal insulation maintains foot comfort in cold offshore and marine conditions
       "Applications: Offshore, marine, and rugged field operations",
       "Benefit: Stability and comfort on uneven, cold environments",
     ],
-    imagePlaceholder:
-      "/images/RiggerBrownShoes.jpeg",
+    imagePlaceholder: "/images/RiggerBrownShoes.jpeg",
   },
   {
     id: 404,
@@ -847,8 +808,7 @@ Lightweight construction reduces fatigue during extended wear in wet environment
       "Protection: Lower-leg coverage from water, mud, light chemicals",
       "Benefit: Lightweight design for extended wear",
     ],
-    imagePlaceholder:
-      "/images/GumBoots.jpeg",
+    imagePlaceholder: "/images/GumBoots.jpeg",
   },
 
   /* ---------- SAFETY ITEMS: EYE & FACE ---------- */
@@ -869,8 +829,7 @@ hot conditions.
       "Feature: Ventilation channels to minimize fogging",
       "Applications: Outdoor work, welding, bright environments",
     ],
-    imagePlaceholder:
-      "/images/VentilatorBlueMirrorGoggles.jpeg",
+    imagePlaceholder: "/images/VentilatorBlueMirrorGoggles.jpeg",
   },
 
   /* ---------- SAFETY ITEMS: HAND PROTECTION ---------- */
@@ -889,8 +848,7 @@ materials provide abrasion resistance and machine washability for cost-effective
       "Benefit: Balanced protection and dexterity",
       "Feature: Abrasion-resistant, often machine washable",
     ],
-    imagePlaceholder:
-      "/images/Performance1Gloves.jpeg",
+    imagePlaceholder: "/images/Performance1Gloves.jpeg",
   },
   {
     id: 407,
@@ -907,8 +865,7 @@ formulations for cleaner handling in food and pharmaceutical applications.
       "Options: Latex-free and powder-free variants",
       "Applications: Healthcare, food handling, pharmaceutical environments",
     ],
-    imagePlaceholder:
-      "/images/SurgicalGloves.jpeg",
+    imagePlaceholder: "/images/SurgicalGloves.jpeg",
   },
   {
     id: 408,
@@ -925,8 +882,7 @@ properties make these gloves suitable for welding and high-temperature work.
       "Protection: Abrasion and moderate heat resistance",
       "Applications: Welding, metalwork, rough material handling",
     ],
-    imagePlaceholder:
-      "/images/LeatherGloves.jpeg",
+    imagePlaceholder: "/images/LeatherGloves.jpeg",
   },
   {
     id: 409,
@@ -943,8 +899,7 @@ durability for extended chemical exposure.
       "Protection: Oils, acids, and various chemicals",
       "Feature: Double-lined or heavy-duty construction for longevity",
     ],
-    imagePlaceholder:
-      "/images/RubberGloves.jpeg",
+    imagePlaceholder: "/images/RubberGloves.jpeg",
   },
   {
     id: 410,
@@ -961,8 +916,7 @@ general handling and assembly work across industries.
       "Benefit: Enhanced grip on wet and dry surfaces",
       "Applications: General handling, assembly, warehouse tasks",
     ],
-    imagePlaceholder:
-      "/images/DottedGloves.jpeg",
+    imagePlaceholder: "/images/DottedGloves.jpeg",
   },
   {
     id: 411,
@@ -979,8 +933,7 @@ cuffs protect wrists and forearms from heat and sparks during extended welding.
       "Protection: Sparks, heat, and molten metal",
       "Feature: Extended cuffs for wrist and forearm safety",
     ],
-    imagePlaceholder:
-      "/images/WeldingGloves.jpeg",
+    imagePlaceholder: "/images/WeldingGloves.jpeg",
   },
 
   /* ---------- SAFETY ITEMS: BODY PROTECTION ---------- */
@@ -999,8 +952,7 @@ closure options accommodate different work environments and equipment configurat
       "Design: Full-body coverage with secure closures",
       "Benefit: Breathable, comfortable for extended shifts",
     ],
-    imagePlaceholder:
-      "/images/Coverall.jpeg",
+    imagePlaceholder: "/images/Coverall.jpeg",
   },
   {
     id: 413,
@@ -1017,8 +969,7 @@ for highway work, traffic management, and night operations across industrial sit
       "Features: Fluorescent fabric with reflective strips",
       "Applications: Roadwork, traffic control, night operations",
     ],
-    imagePlaceholder:
-      "/images/SafetyJackets.png",
+    imagePlaceholder: "/images/SafetyJackets.png",
   },
   {
     id: 414,
@@ -1035,8 +986,7 @@ adjustable straps accommodate various body sizes and equipment configurations.
       "Design: Multi-point attachment and load distribution",
       "Features: Padding and adjustable straps for comfort and fit",
     ],
-    imagePlaceholder:
-      "/images/FullBodyHarness.jpeg",
+    imagePlaceholder: "/images/FullBodyHarness.jpeg",
   },
 
   /* ---------- SAFETY ITEMS: WARNING & SAFETY GEAR ---------- */
@@ -1055,8 +1005,7 @@ Water-resistant adhesive maintains marking in outdoor conditions and harsh weath
       "Design: High-visibility colors (often yellow/black stripes)",
       "Feature: Water-resistant adhesive for outdoor durability",
     ],
-    imagePlaceholder:
-      "/images/WarningTape.jpeg",
+    imagePlaceholder: "/images/WarningTape.jpeg",
   },
   {
     id: 416,
@@ -1073,8 +1022,7 @@ extended UV exposure in outdoor applications.
       "Standard: Typically compliant with recognized fall-protection norms",
       "Use: Elevated work sites, construction, industrial maintenance",
     ],
-    imagePlaceholder:
-      "/images/SafetyNets.jpeg",
+    imagePlaceholder: "/images/SafetyNets.jpeg",
   },
   {
     id: 417,
@@ -1091,8 +1039,7 @@ systems absorb impact energy and distribute load across the head safely.
       "Features: Internal suspension system, optional chin strap",
       "Applications: Construction, industrial, and maintenance sites",
     ],
-    imagePlaceholder:
-      "/images/SafetyHelmet.jpeg",
+    imagePlaceholder: "/images/SafetyHelmet.jpeg",
   },
   {
     id: 418,
@@ -1109,8 +1056,7 @@ adjustable straps accommodate extended use in dusty environments.
       "Feature: Adjustable straps and shaped face seal",
       "Applications: Construction, sanding, industrial dust environments",
     ],
-    imagePlaceholder:
-      "/images/DustMask.jpeg",
+    imagePlaceholder: "/images/DustMask.jpeg",
   },
   {
     id: 419,
@@ -1127,8 +1073,7 @@ Reflective stripes enhance nighttime visibility and improve site safety.
       "Function: Marking lanes, hazards, and work zones",
       "Applications: Roadworks, parking management, industrial yards",
     ],
-    imagePlaceholder:
-      "/images/TrafficCone.jpeg",
+    imagePlaceholder: "/images/TrafficCone.jpeg",
   },
 
   /* ---------- RIGGING EQUIPMENT ---------- */
@@ -1149,8 +1094,7 @@ requirements.
       "Configurations: Endless, looped, tagged, and more",
       "Applications: Marine and industrial lifting operations",
     ],
-    imagePlaceholder:
-      "/images/NylonSling.jpeg",
+    imagePlaceholder: "/images/NylonSling.jpeg",
   },
 ];
 
@@ -1180,18 +1124,18 @@ const ProductCard: React.FC<{
       whileHover={{
         y: -6,
         scale: isRelated ? 1.02 : 1.05,
-        boxShadow: "0px 12px 25px rgba(0, 0, 0, 0.1)"
+        boxShadow: "0px 12px 25px rgba(0, 0, 0, 0.1)",
       }}
       transition={{
         duration: 0.35,
-        ease: "easeOut"
+        ease: "easeOut",
       }}
       className={`cursor-pointer bg-white rounded-2xl shadow-lg border border-gray-200 
         transition-all duration-300 ease-in-out
         ${
           isRelated
             ? "hover:shadow-xl"
-            : "hover:shadow-orange-200 hover:border-[#F97A1E]/70" 
+            : "hover:shadow-orange-200 hover:border-[#F97A1E]/70"
         }`}
     >
       {/* Image */}
@@ -1247,20 +1191,6 @@ type TabKey = "description" | "additional" | "reviews";
 
 const ProductsPage: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  // Disable background scroll when sidebar is open (Mobile UX)
-useEffect(() => {
-  if (sidebarOpen) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "";
-  }
-
-  return () => {
-    document.body.style.overflow = ""; // cleanup
-  };
-}, [sidebarOpen]);
-
   const [activeCategory, setActiveCategory] = useState<string>(
     "Hoses & Connectors"
   );
@@ -1272,48 +1202,63 @@ useEffect(() => {
   >({});
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [activeTab, setActiveTab] = useState<TabKey>("description");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams] = useSearchParams();
   const productDetailsRef = React.useRef<HTMLDivElement | null>(null);
-// Restore last selected product on refresh
-useEffect(() => {
-  const storedId = localStorage.getItem("selectedProductId");
-  if (storedId) {
-    const savedProduct = PRODUCT_DATA.find(
-      (p) => String(p.id) === storedId
-    );
-    if (savedProduct) {
-      setSelectedProduct(savedProduct);
-      setActiveCategory(savedProduct.category);
-      setActiveSubCategory(savedProduct.subCategory ?? null);
 
-      setTimeout(() => {
-        productDetailsRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 200);
+  // Disable background scroll when sidebar is open (Mobile UX)
+  useEffect(() => {
+    if (sidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
     }
-  }
-}, []);
 
-  // 🆕 Add this here — right below activeTab state
-const handleProductSelect = (product: Product) => {
-  setSelectedProduct(product);
-  setActiveCategory(product.category);
-  setActiveSubCategory(product.subCategory ?? null);
-  setActiveTab("description");
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [sidebarOpen]);
 
-  // Save selection to localStorage
-  localStorage.setItem("selectedProductId", String(product.id));
+  // Restore selection from URL (?id=...) or last viewed (localStorage)
+  useEffect(() => {
+    const urlId = searchParams.get("id");
+    const storedId = localStorage.getItem("selectedProductId");
 
-  setTimeout(() => {
-    productDetailsRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }, 50);
-};
+    const finalId = urlId ?? storedId;
+    if (!finalId) return;
 
+    const product = PRODUCT_DATA.find((p) => String(p.id) === finalId);
+    if (!product) return;
 
+    setSelectedProduct(product);
+    setActiveCategory(product.category);
+    setActiveSubCategory(product.subCategory ?? null);
+    setActiveTab("description");
+
+    setTimeout(() => {
+      productDetailsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 200);
+  }, [searchParams]);
+
+  // When a product is selected (from grid, sidebar, or related)
+  const handleProductSelect = (product: Product) => {
+    setSelectedProduct(product);
+    setActiveCategory(product.category);
+    setActiveSubCategory(product.subCategory ?? null);
+    setActiveTab("description");
+
+    localStorage.setItem("selectedProductId", String(product.id));
+
+    setTimeout(() => {
+      productDetailsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 50);
+  };
 
   // Build category -> subcategories map
   const categoryData = useMemo(() => {
@@ -1348,33 +1293,30 @@ const handleProductSelect = (product: Product) => {
     [categoryData, categoryOrder]
   );
 
-const [searchQuery, setSearchQuery] = useState("");
-const filteredProducts = useMemo(() => {
-  return PRODUCT_DATA.filter((product) => {
-    const matchCategory = product.category === activeCategory;
-    const matchSub = activeSubCategory
-      ? product.subCategory === activeSubCategory
-      : true;
+  const filteredProducts = useMemo(() => {
+    return PRODUCT_DATA.filter((product) => {
+      const matchCategory = product.category === activeCategory;
+      const matchSub = activeSubCategory
+        ? product.subCategory === activeSubCategory
+        : true;
 
-    const matchesSearch = searchQuery.trim()
-      ? (
-          product.title.toLowerCase() +
-          product.description.toLowerCase() +
-          product.specs.join(" ").toLowerCase()
-        ).includes(searchQuery.toLowerCase())
-      : true;
+      const matchesSearch = searchQuery.trim()
+        ? (
+            product.title.toLowerCase() +
+            product.description.toLowerCase() +
+            product.specs.join(" ").toLowerCase()
+          ).includes(searchQuery.toLowerCase())
+        : true;
 
-    return matchCategory && matchSub && matchesSearch;
-  });
-}, [activeCategory, activeSubCategory, searchQuery]);
-
+      return matchCategory && matchSub && matchesSearch;
+    });
+  }, [activeCategory, activeSubCategory, searchQuery]);
 
   const topProducts = useMemo(() => PRODUCT_DATA.slice(0, 4), []);
   const relatedProducts = selectedProduct
     ? PRODUCT_DATA.filter(
         (p) =>
-          p.category === selectedProduct.category &&
-          p.id !== selectedProduct.id
+          p.category === selectedProduct.category && p.id !== selectedProduct.id
       ).slice(0, 4)
     : [];
 
@@ -1383,7 +1325,6 @@ const filteredProducts = useMemo(() => {
     setSelectedProduct(null);
     const subs = Array.from(categoryData[category] || []);
     if (subs.length > 0) {
-      // default to first subcategory
       setActiveSubCategory(subs[0]);
     } else {
       setActiveSubCategory(null);
@@ -1402,257 +1343,261 @@ const filteredProducts = useMemo(() => {
 
   return (
     <div className="min-h-screen bg-gray-100 text-slate-900 font-sans antialiased">
-{/* 🧲 FUTURISTIC INDUSTRIAL HERO SECTION (💎 Enhanced Blueprint Design) */}
-<section className="relative bg-[#081A2C] text-white overflow-hidden py-28">
+      {/* 🧲 FUTURISTIC INDUSTRIAL HERO SECTION */}
+      <section className="relative bg-[#081A2C] text-white overflow-hidden py-28">
+        {/* Animated Blueprint Grid Background */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-10 animate-grid-move"
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg,#0e2236 1px,transparent 1px),linear-gradient(#0e2236 1px,transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        ></div>
 
-  {/* 🔷 Animated Blueprint Grid Background */}
-  <div className="absolute inset-0 pointer-events-none opacity-10 animate-grid-move"
-       style={{
-         backgroundImage:
-           "linear-gradient(90deg,#0e2236 1px,transparent 1px),linear-gradient(#0e2236 1px,transparent 1px)",
-         backgroundSize: "48px 48px",
-       }}>
-  </div>
+        {/* Spotlight Glow Center */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(251,174,23,0.18),transparent_70%)]"></div>
 
-  {/* 🔶 Spotlight Glow Center */}
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(251,174,23,0.18),transparent_70%)]"></div>
+        {/* Oil Droplet Motion */}
+        <div className="absolute top-[-20px] left-1/2 w-2 h-2 rounded-full bg-[#FBAE17] animate-oil-drop"></div>
+        <div className="absolute top-[-20px] left-1/2 w-2 h-2 rounded-full bg-[#F97A1E] animate-oil-drop"></div>
 
-  {/* 🟡 Oil Droplet Motion */}
-  <div className="absolute top-[-20px] left-1/2 w-2 h-2 rounded-full bg-[#F97A1E] animate-oil-drop"></div>
+        {/* Glow Nodes */}
+        <div className="absolute top-10 left-20 w-4 h-4 bg-[#F97A1E] rounded-full blur-md animate-pulse"></div>
+        <div className="absolute bottom-16 right-28 w-5 h-5 bg-[#F97A1E] rounded-full blur-lg animate-ping"></div>
+        <div className="absolute top-1/3 right-10 w-3 h-3 bg-[#F97A1E]/80 rounded-full animate-bounce"></div>
 
-  {/* Glow Nodes */}
-  <div className="absolute top-10 left-20 w-4 h-4 bg-[#F97A1E] rounded-full blur-md animate-pulse"></div>
-  <div className="absolute bottom-16 right-28 w-5 h-5 bg-[#F97A1E] rounded-full blur-lg animate-ping"></div>
-  <div className="absolute top-1/3 right-10 w-3 h-3 bg-[#F97A1E]/80 rounded-full animate-bounce"></div>
+        {/* Floating Icons */}
+        <div className="absolute left-12 top-1/2 -translate-y-1/2 animate-float-slow">
+          <Truck size={42} className="text-[#F97A1E]/80" />
+        </div>
+        <div className="absolute right-16 top-1/3 animate-float">
+          <Wrench size={40} className="text-[#F97A1E]/70" />
+        </div>
+        <div className="absolute left-1/3 bottom-10 animate-float-reverse">
+          <Shield size={38} className="text-[#F97A1E]/60" />
+        </div>
 
-  {/* Floating Icons */}
-  <div className="absolute left-12 top-1/2 -translate-y-1/2 animate-float-slow">
-    <Truck size={42} className="text-[#F97A1E]/80" />
-  </div>
-  <div className="absolute right-16 top-1/3 animate-float">
-    <Wrench size={40} className="text-[#F97A1E]/70" />
-  </div>
-  <div className="absolute left-1/3 bottom-10 animate-float-reverse">
-    <Shield size={38} className="text-[#F97A1E]/60" />
-  </div>
+        {/* MAIN CONTENT */}
+        <div className="container mx-auto px-6 relative z-10 text-center max-w-3xl">
+          <p className="text-xs uppercase tracking-[0.35em] text-[#F97A1E] mb-4">
+            Industrial Grade Products
+          </p>
 
-  {/* MAIN CONTENT */}
-  <div className="container mx-auto px-6 relative z-10 text-center max-w-3xl">
-    <p className="text-xs uppercase tracking-[0.35em] text-[#F97A1E] mb-4">
-      Industrial Grade Products
-    </p>
+          <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl mb-5 leading-tight">
+            Products <span className="text-[#F97A1E]">FOR INDUSTRY</span>
+          </h1>
 
-    <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl mb-5 leading-tight">
-      Products <span className="text-[#F97A1E]">FOR INDUSTRY</span>
-    </h1>
+          <p className="text-base sm:text-lg text-gray-300 mb-10">
+            Premium Marine &amp; Oilfield Components Built for Performance and
+            Safety.
+          </p>
 
-    <p className="text-base sm:text-lg text-gray-300 mb-10">
-      Premium Marine & Oilfield Components Built for Performance and Safety.
-    </p>
+          {/* Search */}
+          <div className="max-w-lg mx-auto">
+            <input
+              type="text"
+              placeholder="Search by product name, model #, or spec..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full py-4 px-6 rounded-full bg-[#111A2B] border border-[#F97A1E]/40 text-sm
+                placeholder-gray-400 focus:ring-4 focus:ring-[#F97A1E]/40 focus:outline-none
+                text-white transition"
+            />
+          </div>
+        </div>
+      </section>
 
-    {/* Search */}
-    <div className="max-w-lg mx-auto">
-<input
-  type="text"
-  placeholder="Search by product name, model #, or spec..."
-  value={searchQuery}
-  onChange={(e) => setSearchQuery(e.target.value)}
-  className="w-full py-4 px-6 rounded-full bg-[#111A2B] border border-[#F97A1E]/40 text-sm
-  placeholder-gray-400 focus:ring-4 focus:ring-[#F97A1E]/40 focus:outline-none
-  text-white transition"
-/>
+      {/* ANIMATIONS */}
+      <style>{`
+        @keyframes gridShift {
+          0% { background-position: 0 0; }
+          100% { background-position: 48px 48px; }
+        }
+        .animate-grid-move {
+          animation: gridShift 40s linear infinite;
+        }
 
-    </div>
-  </div>
-</section>
+        @keyframes oilDrop {
+          0% { transform: translate(-50%, -20px) scale(0.5); opacity: 0; }
+          30% { opacity: 1; }
+          100% { transform: translate(-50%, 120vh) scale(1); opacity: 0; }
+        }
+        .animate-oil-drop {
+          animation: oilDrop 6s ease-in infinite;
+        }
 
-{/* ANIMATIONS */}
-<style>{`
-@keyframes gridShift {
-  0% { background-position: 0 0; }
-  100% { background-position: 48px 48px; }
-}
-.animate-grid-move {
-  animation: gridShift 40s linear infinite;
-}
-
-@keyframes oilDrop {
-  0% { transform: translate(-50%, -20px) scale(0.5); opacity: 0; }
-  30% { opacity: 1; }
-  100% { transform: translate(-50%, 120vh) scale(1); opacity: 0; }
-}
-.animate-oil-drop {
-  animation: oilDrop 6s ease-in infinite;
-}
-
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-}
-@keyframes float-reverse {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(14px); }
-}
-.animate-float {
-  animation: float 5s ease-in-out infinite;
-}
-.animate-float-reverse {
-  animation: float-reverse 5.5s ease-in-out infinite;
-}
-.animate-float-slow {
-  animation: float 7s ease-in-out infinite;
-}
-`}</style>
-
-
+        @keyframes float {
+          0%,100% { transform: translateY(0); }
+          50% { transform: translateY(-14px); }
+        }
+        @keyframes float-reverse {
+          0%,100% { transform: translateY(0); }
+          50% { transform: translateY(14px); }
+        }
+        .animate-float {
+          animation: float 5s ease-in-out infinite;
+        }
+        .animate-float-reverse {
+          animation: float-reverse 5.5s ease-in-out infinite;
+        }
+        .animate-float-slow {
+          animation: float 7s ease-in-out infinite;
+        }
+      `}</style>
 
       {/* MAIN CONTENT */}
-{/* MAIN CONTENT */}
-<main className="py-16 relative">
-  <div className="container mx-auto px-4 lg:px-8 flex flex-col lg:flex-row gap-10">
+      <main className="py-16 relative">
+        <div className="container mx-auto px-4 lg:px-8 flex flex-col lg:flex-row gap-10">
+          {/* Mobile Filter Button */}
+          <div className="lg:hidden">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="bg-[#FF7A00] text-white px-4 py-2 rounded-lg mb-4 shadow-md sticky top-[120px] z-[25]"
+            >
+              ☰ Filters
+            </button>
+          </div>
 
-    {/* Mobile Filter Button */}
-    <div className="lg:hidden">
-      <button
-        onClick={() => setSidebarOpen(true)}
-        className="bg-[#FF7A00] text-white px-4 py-2 rounded-lg mb-4 shadow-md sticky top-[120px] z-[25]"
-      >
-        ☰ Filters
-      </button>
-    </div>
+          {/* Mobile Backdrop Overlay */}
+          {sidebarOpen && (
+            <div
+              className="fixed inset-0 bg-black/50 z-[30] lg:hidden"
+              onClick={() => setSidebarOpen(false)}
+            ></div>
+          )}
 
-    {/* Mobile Backdrop Overlay */}
-    {sidebarOpen && (
-      <div
-        className="fixed inset-0 bg-black/50 z-[30] lg:hidden"
-        onClick={() => setSidebarOpen(false)}
-      ></div>
-    )}
+          {/* SIDEBAR */}
+          <aside
+            className={`
+              bg-white p-6 rounded-2xl shadow-xl border border-gray-200
+              transition-all duration-300 
 
-    {/* SIDEBAR */}
-<aside
-  className={`
-    bg-white p-6 rounded-2xl shadow-xl border border-gray-200
-    transition-all duration-300 
+              ${
+                sidebarOpen
+                  ? "fixed top-[80px] left-0 w-72 h-[calc(100vh-80px)] overflow-y-auto z-50"
+                  : "hidden"
+              }
 
-    /* MOBILE – slide drawer */
-    ${sidebarOpen
-      ? "fixed top-[80px] left-0 w-72 h-[calc(100vh-80px)] overflow-y-auto z-50"
-      : "hidden"
-    }
-
-    /* DESKTOP – sidebar fixed in layout */
-    lg:block lg:sticky lg:top-[120px] lg:w-1/4 lg:h-auto lg:overflow-visible
-  `}
->
-
-
-      {/* Close Button Only Mobile */}
-      <div className="lg:hidden flex justify-end mb-3">
-        <button onClick={() => setSidebarOpen(false)} className="text-slate-700 text-lg">
-          ✕
-        </button>
-      </div>
-
-      <h2 className="text-lg font-extrabold text-slate-900 mb-4 border-b border-slate-200 pb-3">
-        Product Categories
-      </h2>
-
-      <nav className="space-y-2 mb-4">
-        {allCategories.map((category) => {
-          const Icon = CATEGORY_ICONS[category] || Package;
-          const isActive = activeCategory === category;
-          const hasSub = categoryData[category]?.size > 0;
-          const expanded = expandedCategories[category] || isActive;
-
-          return (
-            <div key={category}>
+              lg:block lg:sticky lg:top-[120px] lg:w-1/4 lg:h-auto lg:overflow-visible
+            `}
+          >
+            {/* Close Button Only Mobile */}
+            <div className="lg:hidden flex justify-end mb-3">
               <button
-                onClick={() => handleCategoryClick(category)}
-                className={`flex items-center justify-between w-full text-left px-4 py-3 rounded-xl text-sm transition-all
-                  ${isActive
-                    ? "bg-[#F97A1E] text-white font-bold shadow-lg shadow-[#F97A1E]/40"
-                    : "text-slate-700 hover:bg-gray-100 hover:text-slate-900"
-                  }`}
+                onClick={() => setSidebarOpen(false)}
+                className="text-slate-700 text-lg"
               >
-                <span className="flex items-center">
-                  <Icon className="w-5 h-5 mr-3" />
-                  {category}
-                </span>
-                {hasSub && (
-                  <span className="ml-2 text-xs">{expanded ? "−" : "+"}</span>
-                )}
+                ✕
               </button>
+            </div>
 
-              {hasSub && expanded && (
-                <div className="mt-1 mb-2 ml-6 space-y-1">
-                  {[...categoryData[category]].map((sub) => (
+            <h2 className="text-lg font-extrabold text-slate-900 mb-4 border-b border-slate-200 pb-3">
+              Product Categories
+            </h2>
+
+            <nav className="space-y-2 mb-4">
+              {allCategories.map((category) => {
+                const Icon = CATEGORY_ICONS[category] || Package;
+                const isActive = activeCategory === category;
+                const hasSub = categoryData[category]?.size > 0;
+                const expanded = expandedCategories[category] || isActive;
+
+                return (
+                  <div key={category}>
                     <button
-                      key={sub}
-                      onClick={() => handleSubCategoryClick(category, sub)}
-                      className={`w-full text-left text-xs px-3 py-1.5 rounded-lg transition-all
+                      onClick={() => handleCategoryClick(category)}
+                      className={`flex items-center justify-between w-full text-left px-4 py-3 rounded-xl text-sm transition-all
                         ${
-                          activeCategory === category && activeSubCategory === sub
-                            ? "bg-orange-100 text-orange-700 font-semibold"
-                            : "text-slate-600 hover:bg-gray-100 hover:text-slate-900"
+                          isActive
+                            ? "bg-[#F97A1E] text-white font-bold shadow-lg shadow-[#F97A1E]/40"
+                            : "text-slate-700 hover:bg-gray-100 hover:text-slate-900"
                         }`}
                     >
-                      {sub}
+                      <span className="flex items-center">
+                        <Icon className="w-5 h-5 mr-3" />
+                        {category}
+                      </span>
+                      {hasSub && (
+                        <span className="ml-2 text-xs">
+                          {expanded ? "−" : "+"}
+                        </span>
+                      )}
                     </button>
-                  ))}
-                </div>
-              )}
+
+                    {hasSub && expanded && (
+                      <div className="mt-1 mb-2 ml-6 space-y-1">
+                        {[...categoryData[category]].map((sub) => (
+                          <button
+                            key={sub}
+                            onClick={() =>
+                              handleSubCategoryClick(category, sub)
+                            }
+                            className={`w-full text-left text-xs px-3 py-1.5 rounded-lg transition-all
+                              ${
+                                activeCategory === category &&
+                                activeSubCategory === sub
+                                  ? "bg-orange-100 text-orange-700 font-semibold"
+                                  : "text-slate-600 hover:bg-gray-100 hover:text-slate-900"
+                              }`}
+                          >
+                            {sub}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
+
+            {/* Popular Items */}
+            <div className="mt-8 border-t border-slate-200 pt-5">
+              <h3 className="text-sm font-bold text-slate-900 mb-4">
+                Popular Items
+              </h3>
+              <div className="space-y-4">
+                {topProducts.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => {
+                      setSidebarOpen(false);
+                      handleProductSelect(p);
+                    }}
+                    className="flex items-center w-full text-left text-xs text-slate-700 hover:text-orange-600 transition"
+                  >
+                    <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mr-3 overflow-hidden shadow-sm">
+                      <img
+                        src={p.imagePlaceholder}
+                        className="w-full h-full object-contain p-1"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <p className="line-clamp-2 font-medium">{p.title}</p>
+                      <p className="text-gray-400 text-[10px] mt-0.5">
+                        {p.category}
+                      </p>
+                    </div>
+                  </button>
+                ))}
+              </div>
             </div>
-          );
-        })}
-      </nav>
-
-      {/* Popular Items */}
-      <div className="mt-8 border-t border-slate-200 pt-5">
-        <h3 className="text-sm font-bold text-slate-900 mb-4">Popular Items</h3>
-        <div className="space-y-4">
-          {topProducts.map((p) => (
-            <button
-              key={p.id}
-              onClick={() => {
-                setSidebarOpen(false);
-                setSelectedProduct(p);
-              }}
-              className="flex items-center w-full text-left text-xs text-slate-700 hover:text-orange-600 transition"
-            >
-              <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mr-3 overflow-hidden shadow-sm">
-                <img src={p.imagePlaceholder} className="w-full h-full object-contain p-1" />
-              </div>
-              <div className="flex-1">
-                <p className="line-clamp-2 font-medium">{p.title}</p>
-                <p className="text-gray-400 text-[10px] mt-0.5">{p.category}</p>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-    </aside>
-
-
-
+          </aside>
 
           {/* RIGHT SIDE: LIST OR DETAILS */}
           <section className="lg:w-3/4 w-full">
-
             {!selectedProduct ? (
               <>
-                {/* ---------- GRID VIEW ---------- */}
+                {/* GRID VIEW */}
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900">
                       {activeCategory}
                       {activeSubCategory && (
-                        <>
-                          <span className="text-base font-normal text-slate-500">
-                            {" "}
-                            / {activeSubCategory}
-                          </span>
-                        </>
+                        <span className="text-base font-normal text-slate-500">
+                          {" "}
+                          / {activeSubCategory}
+                        </span>
                       )}{" "}
                       <span className="text-base font-normal text-slate-500">
                         ({filteredProducts.length} items)
@@ -1684,7 +1629,7 @@ const filteredProducts = useMemo(() => {
               </>
             ) : (
               <>
-                {/* ---------- DETAILS VIEW ---------- */}
+                {/* DETAILS VIEW */}
                 <button
                   onClick={() => setSelectedProduct(null)}
                   className="mb-6 flex items-center text-sm text-orange-600 font-medium hover:text-orange-800 transition-colors duration-200"
@@ -1707,116 +1652,112 @@ const filteredProducts = useMemo(() => {
                   {activeSubCategory ? ` / ${activeSubCategory}` : ""}
                 </button>
 
-{/* Main info card */}
-<div
-  ref={productDetailsRef}
-  className="bg-white rounded-2xl shadow-2xl shadow-slate-200/50 border border-gray-200 p-10 flex flex-col lg:flex-row gap-12 items-start"
->
-  {/* Left: Image */}
-  <div className="lg:w-1/2 flex items-center justify-center">
-    <div className="border border-gray-200 rounded-xl p-6 bg-gray-50 shadow-inner w-full flex items-center justify-center min-h-[350px]">
-      <img
-        src={selectedProduct.imagePlaceholder}
-        alt={selectedProduct.title}
-        className="max-h-[300px] w-auto object-contain transition-transform duration-500 hover:scale-105"
-      />
-    </div>
-  </div>
+                {/* Main info card */}
+                <div
+                  ref={productDetailsRef}
+                  className="bg-white rounded-2xl shadow-2xl shadow-slate-200/50 border border-gray-200 p-10 flex flex-col lg:flex-row gap-12 items-start"
+                >
+                  {/* Left: Image */}
+                  <div className="lg:w-1/2 flex items-center justify-center">
+                    <div className="border border-gray-200 rounded-xl p-6 bg-gray-50 shadow-inner w-full flex items-center justify-center min-h-[350px]">
+                      <img
+                        src={selectedProduct.imagePlaceholder}
+                        alt={selectedProduct.title}
+                        className="max-h-[300px] w-auto object-contain transition-transform duration-500 hover:scale-105"
+                      />
+                    </div>
+                  </div>
 
-  {/* Right: Product Info */}
-  <div className="lg:w-1/2 flex flex-col justify-center space-y-4">
+                  {/* Right: Product Info */}
+                  <div className="lg:w-1/2 flex flex-col justify-center space-y-4">
+                    <p className="text-xs uppercase tracking-[0.18em] text-orange-600 font-bold">
+                      {selectedProduct.category}
+                      {selectedProduct.subCategory
+                        ? ` / ${selectedProduct.subCategory}`
+                        : ""}
+                    </p>
 
-    {/* Breadcrumb */}
-    <p className="text-xs uppercase tracking-[0.18em] text-orange-600 font-bold">
-      {selectedProduct.category}
-      {selectedProduct.subCategory ? ` / ${selectedProduct.subCategory}` : ""}
-    </p>
+                    <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight">
+                      {selectedProduct.title}
+                    </h2>
 
-    {/* Title */}
-    <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight">
-      {selectedProduct.title}
-    </h2>
+                    <p className="text-sm text-slate-600 mb-2 line-clamp-3">
+                      {selectedProduct.description}
+                    </p>
 
-    {/* Short Description + CTA */}
-    <p className="text-sm text-slate-600 mb-2 line-clamp-3">
-      {selectedProduct.description}
-    </p>
-
-    <button
-      onClick={() => {
-        document.getElementById("product-description-section")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }}
-      className="text-orange-600 font-semibold text-sm hover:text-orange-700 transition underline underline-offset-4 w-fit"
-    >
-      Read more →
-    </button>
-
-  </div>
-</div>
-
-
+                    <button
+                      onClick={() => {
+                        document
+                          .getElementById("product-description-section")
+                          ?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                          });
+                      }}
+                      className="text-orange-600 font-semibold text-sm hover:text-orange-700 transition underline underline-offset-4 w-fit"
+                    >
+                      Read more →
+                    </button>
+                  </div>
+                </div>
 
                 {/* Tabs section */}
-{/* Tabs section */}
-<div
-  id="product-description-section"
-  className="bg-white rounded-2xl shadow-xl border border-gray-200 mt-10"
->
-  {/* Tab headers */}
-  <div className="border-b border-gray-200 flex text-sm font-bold overflow-x-auto">
-    {(["description", "additional"] as TabKey[]).map((tab) => (
-      <button
-        key={tab}
-        onClick={() => setActiveTab(tab)}
-        className={`
-          px-6 py-4 border-r border-gray-200 uppercase tracking-wide transition-all duration-200 whitespace-nowrap
-          ${
-            activeTab === tab
-              ? "text-[#F97A1E] border-b-2 border-b-orange-600 -mb-px bg-gray-50 font-extrabold"
-              : "text-slate-600 bg-white hover:bg-gray-50"
-          }
-        `}
-      >
-        {tab === "description" && "Description"}
-        {tab === "additional" && "Specifications"}
-      </button>
-    ))}
-  </div>
+                <div
+                  id="product-description-section"
+                  className="bg-white rounded-2xl shadow-xl border border-gray-200 mt-10"
+                >
+                  {/* Tab headers */}
+                  <div className="border-b border-gray-200 flex text-sm font-bold overflow-x-auto">
+                    {(["description", "additional"] as TabKey[]).map((tab) => (
+                      <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab)}
+                        className={`
+                          px-6 py-4 border-r border-gray-200 uppercase tracking-wide transition-all duration-200 whitespace-nowrap
+                          ${
+                            activeTab === tab
+                              ? "text-[#F97A1E] border-b-2 border-b-orange-600 -mb-px bg-gray-50 font-extrabold"
+                              : "text-slate-600 bg-white hover:bg-gray-50"
+                          }
+                        `}
+                      >
+                        {tab === "description" && "Description"}
+                        {tab === "additional" && "Specifications"}
+                      </button>
+                    ))}
+                  </div>
 
-  {/* Tab content */}
-  <div className="p-8 text-base text-slate-700">
-    {activeTab === "description" && (
-      <p className="leading-relaxed whitespace-pre-line">
-        {selectedProduct.description}
-      </p>
-    )}
+                  {/* Tab content */}
+                  <div className="p-8 text-base text-slate-700">
+                    {activeTab === "description" && (
+                      <p className="leading-relaxed whitespace-pre-line">
+                        {selectedProduct.description}
+                      </p>
+                    )}
 
-    {activeTab === "additional" && (
-      <div className="space-y-4">
-        <p className="font-extrabold text-lg text-slate-900 mb-2">
-          Detailed Technical Specifications
-        </p>
-        {selectedProduct.specs.length === 0 ? (
-          <p className="text-sm text-slate-500">
-            No additional specifications available for this product.
-          </p>
-        ) : (
-          <ul className="list-disc list-inside space-y-2 pl-4">
-            {selectedProduct.specs.map((s) => (
-              <li key={s} className="text-slate-600">
-                {s}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    )}
-  </div>
-</div>
-
+                    {activeTab === "additional" && (
+                      <div className="space-y-4">
+                        <p className="font-extrabold text-lg text-slate-900 mb-2">
+                          Detailed Technical Specifications
+                        </p>
+                        {selectedProduct.specs.length === 0 ? (
+                          <p className="text-sm text-slate-500">
+                            No additional specifications available for this
+                            product.
+                          </p>
+                        ) : (
+                          <ul className="list-disc list-inside space-y-2 pl-4">
+                            {selectedProduct.specs.map((s) => (
+                              <li key={s} className="text-slate-600">
+                                {s}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
 
                 {/* Related Products */}
                 {relatedProducts.length > 0 && (
