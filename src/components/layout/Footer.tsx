@@ -40,14 +40,17 @@ const Footer = () => {
   return (
     <footer className="bg-primary text-white pt-12 pb-6">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="grid gap-8 lg:grid-cols-[1fr,1.1fr,1fr] items-start">
-          {/* LEFT – Logo + intro + socials + product links */}
+        <div className="grid gap-10 lg:grid-cols-3 items-start">
+          {/* LEFT – Logo + intro + socials */}
           <div className="space-y-5">
             {/* Logo */}
             <div className="flex items-center gap-3">
               <div>
-                <p className="text-lg font-bold leading-tight">
+                <p className="text-lg font-bold leading-tight tracking-wide">
                   WEST LEGEND TRADING LLC
+                </p>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-white/60 mt-1">
+                  Marine • Offshore • Oil &amp; Gas Supply
                 </p>
               </div>
             </div>
@@ -75,20 +78,30 @@ const Footer = () => {
                 </a>
               ))}
             </div>
+          </div>
 
-            {/* Product Links */}
-            <div className="pt-2">
+          {/* MIDDLE – Quick links + Products */}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1 text-xs text-white/80">
+            {/* Quick Links */}
+            <div>
               <h4 className="text-sm font-semibold mb-2 text-white/90">
-                Products
+                Quick Links
               </h4>
-
-              <ul className="space-y-1 text-xs text-white/75">
+              <ul className="space-y-1.5">
                 <li>
                   <Link
-                    to="/products"
+                    to="/"
                     className="hover:text-secondary transition-colors"
                   >
-                    Valves & Flow Control
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/about"
+                    className="hover:text-secondary transition-colors"
+                  >
+                    About Us
                   </Link>
                 </li>
                 <li>
@@ -96,76 +109,69 @@ const Footer = () => {
                     to="/products"
                     className="hover:text-secondary transition-colors"
                   >
-                    Pipes, Tubes & Fittings
+                    Products
                   </Link>
                 </li>
+               
                 <li>
                   <Link
-                    to="/products"
+                    to="/contact"
                     className="hover:text-secondary transition-colors"
                   >
-                    Flanges & Gaskets
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/products"
-                    className="hover:text-secondary transition-colors"
-                  >
-                    Marine & Offshore Equipment
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/products"
-                    className="hover:text-secondary transition-colors"
-                  >
-                    Safety & PPE
+                    Contact
                   </Link>
                 </li>
               </ul>
             </div>
-          </div>
 
-          {/* MIDDLE – Write Us form */}
-          <div className="bg-white text-[#003049] rounded-xl shadow-xl px-6 py-7 mx-auto w-full max-w-sm">
-            <h2 className="text-xl font-bold text-center mb-5">Write Us</h2>
-
-            <form className="space-y-3">
-              <input
-                type="text"
-                name="footerName"
-                id="footerName"
-                autoComplete="name"
-                placeholder="Full Name"
-                className="w-full rounded-md border border-slate-200 px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-secondary focus:border-secondary"
-              />
-              <input
-                type="tel"
-                name="footerPhone"
-                id="footerPhone"
-                autoComplete="tel"
-                placeholder="Phone Number"
-                className="w-full rounded-md border border-slate-200 px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-secondary focus:border-secondary"
-              />
-              <textarea
-                rows={3}
-                name="footerMessage"
-                id="footerMessage"
-                autoComplete="off"
-                placeholder="Your Message"
-                className="w-full rounded-md border border-slate-200 px-3 py-2 text-xs outline-none resize-none focus:ring-2 focus:ring-secondary focus:border-secondary"
-              />
-
-              <div className="pt-1 flex justify-center">
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center px-8 py-2.5 rounded-full bg-gradient-to-r from-[#ff7e32] to-[#ffb347] text-white text-xs font-semibold shadow-md hover:brightness-105 transition-all"
-                >
-                  Send Message
-                </button>
-              </div>
-            </form>
+            {/* Products */}
+            <div>
+              <h4 className="text-sm font-semibold mb-2 text-white/90">
+                Product Categories
+              </h4>
+              <ul className="space-y-1.5">
+                <li>
+                  <Link
+                    to="/products"
+                    className="hover:text-secondary transition-colors"
+                  >
+                    Valves &amp; Flow Control
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/products"
+                    className="hover:text-secondary transition-colors"
+                  >
+                    Pipes, Tubes &amp; Fittings
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/products"
+                    className="hover:text-secondary transition-colors"
+                  >
+                    Flanges &amp; Gaskets
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/products"
+                    className="hover:text-secondary transition-colors"
+                  >
+                    Marine &amp; Offshore Equipment
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/products"
+                    className="hover:text-secondary transition-colors"
+                  >
+                    Safety &amp; PPE
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* RIGHT – Contact info */}
