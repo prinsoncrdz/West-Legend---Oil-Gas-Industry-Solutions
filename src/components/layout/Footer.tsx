@@ -21,13 +21,7 @@ const Footer = () => {
 <div className="space-y-5">
   {/* Logo */}
   <div className="flex items-center gap-3">
-    <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center">
-      <span className="text-[#003049] font-bold text-xl">W</span>
-    </div>
     <div>
-      <p className="text-[11px] uppercase tracking-[0.18em] text-white/80">
-        West Legend
-      </p>
       <p className="text-lg font-bold leading-tight">
         WEST LEGEND TRADING LLC
       </p>
@@ -131,8 +125,11 @@ const Footer = () => {
                 </div>
                 <span className="font-semibold text-sm">Phone</span>
               </div>
+              <p className="ml-11 pb-1.5">
+                +971 4 272 1901
+              </p>
               <p className="ml-11 border-b border-white/25 pb-1.5">
-                +971 4 123 4567
+                +971 4 266 4574
               </p>
             </div>
 
@@ -145,7 +142,7 @@ const Footer = () => {
                 <span className="font-semibold text-sm">Email</span>
               </div>
               <p className="ml-11 border-b border-white/25 pb-1.5">
-                info@westlegendtrading.com
+                westlegendtrdg@hotmail.com
               </p>
             </div>
 
@@ -158,28 +155,11 @@ const Footer = () => {
                 <span className="font-semibold text-sm">Address</span>
               </div>
               <p className="ml-11 border-b border-white/25 pb-1.5 leading-relaxed">
-                Dubai, United Arab Emirates
+                P.O. Box 19088, Deira, Dubai - UAE
                 <br />
                 Serving UAE &amp; GCC Region
               </p>
-            </div>
-
-            {/* Working hours */}
-            <div>
-              <div className="flex items-center gap-3 mb-1">
-                <div className="h-8 w-8 rounded-full border border-white/30 flex items-center justify-center">
-                  <span className="text-[10px] font-semibold">Hrs</span>
-                </div>
-                <span className="font-semibold text-sm">Working Hours</span>
-              </div>
-              <p className="ml-11 leading-relaxed">
-                Mon–Fri: 8:00am – 6:00pm
-                <br />
-                Sat: 9:00am – 2:00pm
-                <br />
-                Sun: Closed
-              </p>
-            </div>
+            </div>            
           </div>
         </div>
 

@@ -45,7 +45,7 @@ const Hero: React.FC = () => {
           <motion.h1 variants={fadeUp} className="text-white text-3xl md:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight drop-shadow-lg">
             West Legend Trading LLC
             <span className="block text-lg md:text-2xl font-medium text-white/80 mt-2">
-              Trusted supplier of certified industrial & marine equipment across the GCC
+              Your Trusted Partner in Marine, Industrial, and Oilfield Supplies 
             </span>
           </motion.h1>
 

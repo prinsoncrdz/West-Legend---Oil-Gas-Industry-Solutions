@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, ChevronUp, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const catalogUrl = "/mnt/data/WEST LEGEND CONTENT (2) (1).pdf";
+const catalogUrl = "/westlegend.pdf";
 
 const productGroups = [
   { title: "Hoses & Connectors", items: ["Hydraulic Hose", "Industrial Rubber Hoses", "Hammer Unions", "Swivel Joints", "Trelleborg Composite Hoses", "Rotary Drilling Hoses"] },
@@ -47,8 +47,6 @@ const Header = () => {
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About" },
-    { path: "/services", label: "Services" },
-    { path: "/contact", label: "Contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -80,29 +78,34 @@ const Header = () => {
           <div className="flex items-center justify-between h-20">
 
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
-              <div className={`w-10 h-10 rounded flex items-center justify-center transition-all ${isScrolled ? "scale-90" : "scale-100"} bg-secondary`}>
-                <span className="text-secondary-foreground font-bold text-xl">W</span>
-              </div>
-              <span className={`text-2xl font-bold ${isScrolled ? "text-lg" : "text-2xl"}`}>
-                WEST LEGEND
-              </span>
-            </Link>
+<Link to="/" className="flex items-center gap-3">
+  <img
+    src="/westlegend.png"
+    alt="West Legend Logo"
+    className={`h-20 transition-all ${isScrolled ? "scale-90" : "scale-100"}`}
+  />
+</Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`font-semibold relative px-1 transition-colors ${
-                    isActive(link.path) ? "text-secondary" : "text-foreground hover:text-secondary"
-                  }`}
-                >
-                  {link.label}
-                  {isActive(link.path) && <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-secondary" />}
-                </Link>
-              ))}
+
+
+{/* RIGHT SIDE NAV – MERGED */}
+<div className="hidden lg:flex items-center gap-8">
+
+  {/* Home / About */}
+  {navLinks.map((link) => (
+    <Link
+      key={link.path}
+      to={link.path}
+      className={`font-semibold relative px-1 transition-colors ${
+        isActive(link.path) ? "text-secondary" : "text-foreground hover:text-secondary"
+      }`}
+    >
+      {link.label}
+      {isActive(link.path) && (
+        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-secondary" />
+      )}
+    </Link>
+  ))}
 
               {/* Products Dropdown */}
               <div
@@ -120,7 +123,7 @@ const Header = () => {
                   }`}
                 >
                   Products
-                  {desktopProductsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  {desktopProductsOpen ? <ChevronUp size={16} /> : (<ChevronDown size={16} />)}
                 </button>
 
                 {desktopProductsOpen && (
@@ -159,14 +162,20 @@ const Header = () => {
                             </Link>
                           </li>
                           <li>
-                            <a href={catalogUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 py-1 hover:text-blue-600">
-                              <FileText size={16} /> Download Catalog
-                            </a>
+                            <a
+  href={catalogUrl}
+  download
+  className="flex items-center gap-2 py-1 hover:text-blue-600"
+>
+  <FileText size={16} /> Download Catalog
+</a>
+
                           </li>
                           <li>
                             <Link to="/contact" className="block py-1 text-slate-600 hover:text-blue-600" onClick={() => setDesktopProductsOpen(false)}>
-                              Request a Quote
-                            </Link>
+  Contact
+</Link>
+
                           </li>
                         </ul>
                       </div>
@@ -176,37 +185,12 @@ const Header = () => {
                 )}
 
               </div>
-            </nav>
 
-            {/* MERGED → Both branches wanted a CTA button + cart icon */}
-            <div className="hidden lg:flex items-center gap-6">
-
-              <Button asChild className="bg-secondary hover:bg-secondary/90">
-                <Link to="/contact">Get A Quote</Link>
-              </Button>
-
-              {/* Cart Icon */}
-              <Link to="/cart" className="relative group">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-7 h-7 text-primary group-hover:text-secondary transition"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m0 0h12m-12 0a2 2 0 104 0m8 0a2 2 0 104 0"
-                  />
-                </svg>
-
-                <span className="absolute -top-2 -right-2 bg-secondary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                  0
-                </span>
-              </Link>
-            </div>
+            {/* Get A Quote */}
+  <Button asChild className="bg-secondary hover:bg-secondary/90">
+    <Link to="/contact">Contact</Link>
+  </Button>
+</div>
 
             {/* Mobile Menu Button */}
             <div className="flex items-center gap-3 lg:hidden">
@@ -243,29 +227,6 @@ const Header = () => {
                   {link.label}
                 </Link>
               ))}
-
-              {/* Cart – Mobile */}
-              <Link
-                to="/cart"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="font-semibold py-2 flex items-center gap-3 text-foreground hover:text-secondary"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m0 0h12m-12 0a2 2 0 104 0m8 0a2 2 0 104 0"
-                  />
-                </svg>
-                Cart
-              </Link>
 
               {/* Mobile Products Accordion */}
               <div>
@@ -304,19 +265,25 @@ const Header = () => {
                       </div>
                     ))}
 
-                    <a href={catalogUrl} target="_blank" rel="noreferrer" className="text-blue-600 font-medium">
-                      Download Catalog
-                    </a>
+                    <a
+  href={catalogUrl}
+  download
+  className="text-blue-600 font-medium"
+>
+  Download Catalog
+</a>
+
 
                   </div>
                 </div>
               </div>
 
               <Button asChild className="bg-secondary hover:bg-secondary/90 w-full">
-                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  Get A Quote
-                </Link>
-              </Button>
+  <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+    Contact
+  </Link>
+</Button>
+
 
             </nav>
           </div>
