@@ -118,15 +118,19 @@ const Home = () => {
             </h2>
 
             <p className="text-base md:text-lg text-slate-700 leading-relaxed">
-              WEST LEGEND TRADING LLC is a premier supplier dedicated to serving
-              the marine, oilfield, and petroleum industries with top-quality
-              products and exceptional service across the UAE and GCC region.
+             A premier supplier dedicated to serving the marine, 
+oilfield, and petroleum industries with top-quality products and exceptional service across 
+the UAE and GCC region. We specialize in providing a comprehensive range of industrial 
+equipment and materials that meet stringent API, ASTM, and ISO standards, helping 
+businesses operate smoothly, safely, and eAiciently.
             </p>
 
             <p className="text-base md:text-lg text-slate-700 leading-relaxed">
-              We provide a comprehensive range of industrial equipment and
-              materials aligned with API, ASTM, and ISO standards—ensuring
-              safety, efficiency, and reliability.
+              With a strong commitment to reliability, quality, and customer satisfaction, WEST LEGEND 
+TRADING LLC is your go-to source for all your marine and oilfield supply needs. Our extensive 
+product portfolio includes valves, pipes, flanges, fittings, gaskets, safety gear, and much 
+more—sourced from globally recognized manufacturers to ensure superior performance in the 
+most demanding environments. 
             </p>
 
             {/* Highlights */}
@@ -200,34 +204,47 @@ const Home = () => {
         </div>
       </motion.section>
 
-      {/* STATS SECTION */}
-      <motion.section
-        className="bg-[#0b2a45] py-12"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+     {/* STATS SECTION */}
+<motion.section
+  className="bg-[#0b2a45] py-12"
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.3 }}
+  transition={{ duration: 0.6, ease: "easeOut" }}
+>
+  <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    {[
+      {
+        label: "Certified Products",
+        desc: "API • ASTM • ISO Standards",
+      },
+      {
+        label: "Trusted Across GCC",
+        desc: "Serving UAE & GCC Region",
+      },
+      {
+        label: "Fast Delivery",
+        desc: "Strong Logistics Network",
+      },
+      {
+        label: "Technical Support",
+        desc: "Expert Guidance & Service",
+      },
+    ].map((item, i) => (
+      <motion.div
+        key={i}
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.4, delay: i * 0.1 }}
+        className="px-3"
       >
-        <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          {[
-            { label: "Years Experience", value: "15+" },
-            { label: "Projects", value: "500+" },
-            { label: "Products", value: "300+" },
-            { label: "GCC Countries", value: "6" },
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-            >
-              <p className="text-3xl font-bold text-secondary">{item.value}</p>
-              <p className="text-xs text-slate-200 uppercase">{item.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
+        <p className="text-lg font-bold text-secondary">{item.label}</p>
+        <p className="text-xs text-slate-200 mt-1">{item.desc}</p>
+      </motion.div>
+    ))}
+  </div>
+</motion.section>
 
       {/* WHY CHOOSE US */}
       <motion.section
