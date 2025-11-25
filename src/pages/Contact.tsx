@@ -25,48 +25,79 @@ const Contact = () => {
 
 
 
-      {/* -------------------------------------- */}
-      {/* CONTACT CARDS BELOW BANNER */}
-      {/* -------------------------------------- */}
-      <section className="relative z-20 -mt-16 mb-16">
-        <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+{/* -------------------------------------- */}
+{/* CONTACT CARDS BELOW BANNER */}
+{/* -------------------------------------- */}
+<section className="relative z-20 -mt-20 mb-16">
+  <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
-          {[
-            { icon: <MapPin size={28} />, title: "Our Address", text: "P.O. Box 19088, Deira\n Dubai – UAE" },
-            { icon: <Phone size={28} />, title: "Our Number", text: "+971 4 266 4574 \n+971 4 272 1901" },
-            { icon: <img src="/icons/FaxWhite.svg" alt="Fax" className="w-7 h-7" />, title: "Our Fax", text: "+971 4 273 8912" },
-            { icon: <Mail size={28} />, title: "Our Email", text: "westlegendtrdg@hotmail.com" }
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative bg-[#0a1a2f] text-white p-6 rounded-lg shadow-xl overflow-hidden group"
-            >
+    {[
+      { icon: <MapPin size={32} />, title: "Our Address", text: "P.O. Box 19088, Deira\nDubai – UAE" },
+      { icon: <Phone size={32} />, title: "Our Number", text: "+971 4 266 4574\n+971 4 272 1901" },
+      { icon: <img src="/icons/FaxWhite.svg" className="w-8 h-8" />, title: "Our Fax", text: "+971 4 273 8912" },
+      { icon: <Mail size={32} />, title: "Our Email", text: "westlegendtrdg@hotmail.com" }
+    ].map((item, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="
+          relative mx-auto 
+          w-64 h-64 
+          rounded-full 
+          bg-[#0a1a2f] 
+          text-white 
+          shadow-xl 
+          overflow-hidden 
+          flex flex-col items-center justify-center
+          group
+        "
+      >
 
-              {/* ORANGE SWIPE HOVER */}
-              <div
-                className="absolute inset-0 bg-secondary -translate-y-full group-hover:translate-y-0 
-                transition-transform duration-500 ease-out"
-              ></div>
+        {/* 🔥 ROTATING NEON GLOW BORDER */}
+        <motion.div
+          animate={{ rotate: 360 }}          // continuous rotation
+          transition={{
+            repeat: Infinity,
+            duration: 12,
+            ease: "linear"
+          }}
+          whileHover={{
+            rotate: 360 + 45,                  // extra spin on hover
+            scale: 1.05,                       // subtle bump
+            boxShadow: "0 0 25px #ff9500, 0 0 50px #ff9500",  // NEON glow
+          }}
+          className="
+            absolute inset-0 
+            rounded-full 
+            border-[6px] border-secondary
+            border-t-transparent border-r-transparent
+          "
+          style={{
+            filter: "drop-shadow(0 0 8px #ff9500)"  // slight glow even at rest
+          }}
+        />
 
-              <div className="relative z-10 space-y-3">
-                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
-                  {item.icon}
-                </div>
-                <h3 className="text-lg font-semibold">{item.title}</h3>
-                <p className="text-white/80 whitespace-pre-line text-sm leading-relaxed">
-                  {item.text}
-                </p>
-              </div>
+        {/* Circle Content */}
+        <div className="relative z-10 text-center px-4 space-y-2">
+          <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center mx-auto">
+            {item.icon}
+          </div>
 
-            </motion.div>
-          ))}
+          <h3 className="text-lg font-semibold">{item.title}</h3>
 
+          <p className="text-white/80 whitespace-pre-line text-sm leading-relaxed">
+            {item.text}
+          </p>
         </div>
-      </section>
+
+      </motion.div>
+    ))}
+
+  </div>
+</section>
 
 
 
