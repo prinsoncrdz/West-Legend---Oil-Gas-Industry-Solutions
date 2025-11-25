@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, Mail, ChevronDown, ChevronUp, FileText } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronUp, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const catalogUrl = "/mnt/data/WEST LEGEND CONTENT (2) (1).pdf"; // <-- local uploaded PDF path
+const catalogUrl = "/mnt/data/WEST LEGEND CONTENT (2) (1).pdf";
 
 const productGroups = [
   { title: "Hoses & Connectors", items: ["Hydraulic Hose", "Industrial Rubber Hoses", "Hammer Unions", "Swivel Joints", "Trelleborg Composite Hoses", "Rotary Drilling Hoses"] },
@@ -32,7 +32,6 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close desktop dropdown on outside click
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
       if (!dropdownRef.current) return;
@@ -48,14 +47,12 @@ const Header = () => {
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About" },
-    // products handled separately
     { path: "/services", label: "Services" },
     { path: "/contact", label: "Contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
-  // helpers to manage hover delayed close (prevents flicker)
   const openDropdown = () => {
     if (closeTimeout.current) {
       window.clearTimeout(closeTimeout.current);
@@ -63,6 +60,7 @@ const Header = () => {
     }
     setDesktopProductsOpen(true);
   };
+
   const scheduleCloseDropdown = (delay = 150) => {
     if (closeTimeout.current) window.clearTimeout(closeTimeout.current);
     closeTimeout.current = window.setTimeout(() => {
@@ -73,8 +71,6 @@ const Header = () => {
 
   return (
     <>
-    
-      {/* Main Header */}
       <header
         className={`sticky top-0 z-50 transition-all duration-300 ${
           isScrolled ? "bg-background shadow-industrial backdrop-blur-sm" : "bg-background/95"
@@ -82,12 +78,15 @@ const Header = () => {
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
+
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
               <div className={`w-10 h-10 rounded flex items-center justify-center transition-all ${isScrolled ? "scale-90" : "scale-100"} bg-secondary`}>
                 <span className="text-secondary-foreground font-bold text-xl">W</span>
               </div>
-              <span className={`text-2xl font-bold ${isScrolled ? "text-lg" : "text-2xl"}`}>WEST LEGEND</span>
+              <span className={`text-2xl font-bold ${isScrolled ? "text-lg" : "text-2xl"}`}>
+                WEST LEGEND
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -105,7 +104,7 @@ const Header = () => {
                 </Link>
               ))}
 
-              {/* Products Dropdown (desktop) */}
+              {/* Products Dropdown */}
               <div
                 ref={dropdownRef}
                 className="relative"
@@ -127,7 +126,6 @@ const Header = () => {
                 {desktopProductsOpen && (
                   <div
                     className="absolute left-1/2 transform -translate-x-1/2 mt-3 w-[760px] bg-white border rounded-md shadow-lg p-4 z-50 pointer-events-auto"
-                    // keep open while user interacts
                     onMouseEnter={openDropdown}
                     onMouseLeave={() => scheduleCloseDropdown(120)}
                   >
@@ -141,8 +139,8 @@ const Header = () => {
                                 <Link
                                   to={`/products`}
                                   state={{ category: group.title, item: it }}
-                                  className="block py-1 text-slate-600 hover:text-blue-600 transition-colors"
                                   onClick={() => setDesktopProductsOpen(false)}
+                                  className="block py-1 text-slate-600 hover:text-blue-600"
                                 >
                                   {it}
                                 </Link>
@@ -152,7 +150,7 @@ const Header = () => {
                         </div>
                       ))}
 
-                      <div className="col-span-1">
+                      <div>
                         <h4 className="font-semibold text-slate-800 mb-2">Quick Links</h4>
                         <ul className="space-y-3">
                           <li>
@@ -172,17 +170,42 @@ const Header = () => {
                           </li>
                         </ul>
                       </div>
+
                     </div>
                   </div>
                 )}
+
               </div>
             </nav>
 
-            {/* CTA Button (desktop) */}
-            <div className="hidden lg:block">
+            {/* MERGED → Both branches wanted a CTA button + cart icon */}
+            <div className="hidden lg:flex items-center gap-6">
+
               <Button asChild className="bg-secondary hover:bg-secondary/90">
                 <Link to="/contact">Get A Quote</Link>
               </Button>
+
+              {/* Cart Icon */}
+              <Link to="/cart" className="relative group">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-7 h-7 text-primary group-hover:text-secondary transition"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m0 0h12m-12 0a2 2 0 104 0m8 0a2 2 0 104 0"
+                  />
+                </svg>
+
+                <span className="absolute -top-2 -right-2 bg-secondary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  0
+                </span>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -199,6 +222,7 @@ const Header = () => {
                 {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
               </button>
             </div>
+
           </div>
         </div>
 
@@ -206,6 +230,7 @@ const Header = () => {
         {isMobileMenuOpen && (
           <div className="lg:hidden bg-background border-t border-border animate-fade-in">
             <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
+              
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
@@ -219,6 +244,29 @@ const Header = () => {
                 </Link>
               ))}
 
+              {/* Cart – Mobile */}
+              <Link
+                to="/cart"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-semibold py-2 flex items-center gap-3 text-foreground hover:text-secondary"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m0 0h12m-12 0a2 2 0 104 0m8 0a2 2 0 104 0"
+                  />
+                </svg>
+                Cart
+              </Link>
+
               {/* Mobile Products Accordion */}
               <div>
                 <button
@@ -229,8 +277,13 @@ const Header = () => {
                   {mobileProductsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </button>
 
-                <div className={`overflow-hidden transition-all duration-300 ${mobileProductsOpen ? "max-h-[1200px] mt-2" : "max-h-0"}`}>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    mobileProductsOpen ? "max-h-[1200px] mt-2" : "max-h-0"
+                  }`}
+                >
                   <div className="grid gap-4">
+
                     {productGroups.map((g) => (
                       <div key={g.title}>
                         <h5 className="text-sm font-semibold text-slate-800">{g.title}</h5>
@@ -250,16 +303,21 @@ const Header = () => {
                         </ul>
                       </div>
                     ))}
+
                     <a href={catalogUrl} target="_blank" rel="noreferrer" className="text-blue-600 font-medium">
                       Download Catalog
                     </a>
+
                   </div>
                 </div>
               </div>
 
               <Button asChild className="bg-secondary hover:bg-secondary/90 w-full">
-                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Get A Quote</Link>
+                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                  Get A Quote
+                </Link>
               </Button>
+
             </nav>
           </div>
         )}
