@@ -332,11 +332,10 @@ range of industrial and commercial fluid handling needs.
       "/images/AluminiumStainlessSteelandBrassCamlockFittings.jpeg",
   },
 
-  /* ---------- FASTENERS ---------- */
   {
-    id: 201,
-    category: "Fasteners",
-    subCategory: "Fasteners",
+    id: 114,
+    category: "Hoses & Connectors",
+    subCategory: "Hoses & Connectors",
     title: "Bolts, Nuts, Washers & Locknuts",
     description: `
 A wide range of industrial fasteners including bolts (UNC, LN key bolts) and nuts made from stainless 
