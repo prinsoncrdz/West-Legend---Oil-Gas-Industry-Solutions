@@ -2,11 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "@fontsource/poppins/300.css";
-@import "@fontsource/poppins/400.css";
-@import "@fontsource/poppins/500.css";
-@import "@fontsource/poppins/600.css";
-@import "@fontsource/poppins/700.css";
+
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
@@ -105,28 +101,11 @@ All colors MUST be HSL.
 @layer base {
   * {
   @apply border-border;
-  font-family: "Poppins";   /* 👈 ADD THIS ONE LINE */
 }
 
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
-  }
-  
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-  }
-  
-  h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
-  }
-  
-  h3 {
-    @apply text-2xl md:text-3xl;
+  font-family: "Poppins", sans-serif;   /* 👈 ADD THIS ONE LINE */
   }
 }
 
